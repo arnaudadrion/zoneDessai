@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="row row-cols-3">
+        {% for feature in features %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ feature.title }}</h5>
+                    <p class="card-text">{{ feature.content }}</p>
+                    <a href="{{ path(feature.link) }}" class="btn btn-primary">Aller voir</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

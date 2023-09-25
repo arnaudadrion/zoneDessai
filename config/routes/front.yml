@@ -1,0 +1,5 @@
+front:
+    path: /
+    defaults:
+        _controller: App\Controller\FrontController::frontAction
+        permanent: true

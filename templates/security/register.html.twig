@@ -1,0 +1,14 @@
+{% extends './base.html.twig' %}
+
+{% block content %}
+    <div class="example-wrapper">
+        <h2>Login</h2>
+
+        {{ form_start(form) }}
+        {{ form_end(form) }}
+
+        <div>
+            <a href="{{ path('app_security_login') }}">Se connecter</a>
+        </div>
+    </div>
+{% endblock %}

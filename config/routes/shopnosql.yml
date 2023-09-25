@@ -1,0 +1,4 @@
+shop_nosql:
+    path: /shop
+    defaults:
+        _controller: App\Controller\ShopNoSql\ShopController::shopAction

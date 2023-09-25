@@ -1,0 +1,6 @@
+front_routes:
+    resource: "front.yml"
+
+#shop_no_sql_routes:
+#    prefix: /shop_no_sql
+#    resource: "shopnosql.yml"
