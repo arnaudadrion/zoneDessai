@@ -24,8 +24,11 @@ class ShopController extends AbstractController
     {
         $products = json_decode(file_get_contents('./data/products.json'), true);
         $this->initShop($products);
-        dump($this->shop);
-        return $this->render('shopNoSql/shop_no_sql.html.twig', ['shop' => $this->shop]);
+        $htmlArbo = '<ul class="list-group">';
+        $this->createHTMLArborescence($this->shop->getMainCategory()->getChildren(), $htmlArbo);
+        $htmlArbo .= '</ul class="list-group">';
+//        dump($htmlArbo);
+        return $this->render('shopNoSql/shop_no_sql.html.twig', ['shop' => $this->shop, 'htmlArbo' => $htmlArbo]);
     }
 
     public function addItemAction ()
@@ -71,6 +74,18 @@ class ShopController extends AbstractController
                 $parent = $newCategory;
             } else {
                 $parent = $parent->getChild($category);
+            }
+        }
+    }
+
+    private function createHTMLArborescence($categories, &$htmlArbo)
+    {
+        foreach ($categories as $category) {
+            $htmlArbo .= '<li class="list-group-item">'. $category->getName() .'</li>';
+
+            if (!empty($category->getChildren())) {
+                $htmlArbo .= '<ul class="list-group">';
+                $this->createHTMLArborescence($category->getChildren(), $htmlArbo);
             }
         }
     }
