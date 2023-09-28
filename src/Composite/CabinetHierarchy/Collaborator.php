@@ -2,13 +2,16 @@
 
 namespace App\Composite\CabinetHierarchy;
 
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 
 abstract class Collaborator
 {
-    protected $parent;
+    private User $user;
 
-    protected ArrayCollection $children;
+    private $parent;
+
+    private ArrayCollection $children;
 
 
     public function setParent(?Collaborator $parent)

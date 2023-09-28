@@ -8,10 +8,10 @@
 
             </div>
             <div class="col-3 text-right">
-                {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                    <a class="" href="{{ path('app_security_login') }}">Login</a>
-                {% else %}
+                {% if app.user %}
                     <p>{{ app.user.email }}</p>
+                {% else %}
+                    <a class="" href="{{ path('app_security_login') }}">Login</a>
                 {% endif %}
             </div>
         </div>
