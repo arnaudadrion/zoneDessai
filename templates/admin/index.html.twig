@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     <div class="container">
         <h2 class="">Liste des features</h2>
-
+        <a href="{{ path('admin_features_add') }}">Ajouter une feature</a>
         <div id="features" class="my-5">
             <div class="d-flex justify-content-center my-5">
                 <div class="spinner-border text-secondary" role="status">

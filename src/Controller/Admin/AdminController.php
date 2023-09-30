@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Features;
+use App\Form\FeatureType;
 use App\Repository\FeaturesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\DataTableFactory;
@@ -93,8 +95,21 @@ class AdminController extends AbstractController
     }
 
     #[Route('/add-feature', name: 'add')]
-    public function addFeatureAction(Request $request)
+    public function addFeatureAction(Request $request, EntityManagerInterface $em,)
     {
+        $newFeature = new Features();
+        $form = $this->createForm(FeatureType::class, $newFeature);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() &&$form->isValid()) {
+            $em->persist($newFeature);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_features_list');
+        }
+
+        return $this->render('admin/new.html.twig', [
+           'form' => $form->createView()
+        ]);
     }
 }

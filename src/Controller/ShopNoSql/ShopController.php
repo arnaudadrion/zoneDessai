@@ -86,6 +86,7 @@ class ShopController extends AbstractController
             if (!empty($category->getChildren())) {
                 $htmlArbo .= '<ul class="list-group">';
                 $this->createHTMLArborescence($category->getChildren(), $htmlArbo);
+                $htmlArbo .= '</ul>';
             }
         }
     }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="">Nouvelle feature</h2>
+        <a href="{{ path('admin_features_list') }}">Retour à la liste</a>
+        <div id="features" class="my-5">
+            {{ form_start(form) }}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
