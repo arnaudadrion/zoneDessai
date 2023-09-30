@@ -15,19 +15,16 @@ class Cabinet
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'cabinet', targetEntity: Audit::class)]
-    private Collection $audits;
+    #[ORM\OneToMany(mappedBy: 'cabinet', targetEntity: Collaborator::class)]
+    private Collection $collaborators;
 
-    #[ORM\OneToOne(inversedBy: 'cabinet', cascade: ['persist', 'remove'])]
-    private ?Director $director = null;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'cabinet', targetEntity: TeamChief::class)]
-    private Collection $TeamChiefs;
 
     public function __construct()
     {
-        $this->audits = new ArrayCollection();
-        $this->TeamChiefs = new ArrayCollection();
+        $this->collaborators = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -36,73 +33,43 @@ class Cabinet
     }
 
     /**
-     * @return Collection<int, Audit>
+     * @return Collection<int, Collaborator>
      */
-    public function getAudits(): Collection
+    public function getCollaborators(): Collection
     {
-        return $this->audits;
+        return $this->collaborators;
     }
 
-    public function addAudit(Audit $audit): static
+    public function addCollaborator(Collaborator $collaborator): static
     {
-        if (!$this->audits->contains($audit)) {
-            $this->audits->add($audit);
-            $audit->setCabinet($this);
+        if (!$this->collaborators->contains($collaborator)) {
+            $this->collaborators->add($collaborator);
+            $collaborator->setCabinet($this);
         }
 
         return $this;
     }
 
-    public function removeAudit(Audit $audit): static
+    public function removeCollaborator(Collaborator $collaborator): static
     {
-        if ($this->audits->removeElement($audit)) {
+        if ($this->collaborators->removeElement($collaborator)) {
             // set the owning side to null (unless already changed)
-            if ($audit->getCabinet() === $this) {
-                $audit->setCabinet(null);
+            if ($collaborator->getCabinet() === $this) {
+                $collaborator->setCabinet(null);
             }
         }
 
         return $this;
     }
 
-    public function getDirector(): ?Director
+    public function getName(): ?string
     {
-        return $this->director;
+        return $this->name;
     }
 
-    public function setDirector(?Director $director): static
+    public function setName(string $name): static
     {
-        $this->director = $director;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, TeamChief>
-     */
-    public function getTeamChiefs(): Collection
-    {
-        return $this->TeamChiefs;
-    }
-
-    public function addTeamChief(TeamChief $teamChief): static
-    {
-        if (!$this->TeamChiefs->contains($teamChief)) {
-            $this->TeamChiefs->add($teamChief);
-            $teamChief->setCabinet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeamChief(TeamChief $teamChief): static
-    {
-        if ($this->TeamChiefs->removeElement($teamChief)) {
-            // set the owning side to null (unless already changed)
-            if ($teamChief->getCabinet() === $this) {
-                $teamChief->setCabinet(null);
-            }
-        }
+        $this->name = $name;
 
         return $this;
     }

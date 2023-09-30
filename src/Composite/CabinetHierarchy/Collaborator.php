@@ -2,17 +2,31 @@
 
 namespace App\Composite\CabinetHierarchy;
 
-use App\Entity\User;
+use App\Entity\Collaborator as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 abstract class Collaborator
 {
-    private User $user;
+    private Entity $entity;
 
     private $parent;
 
     private ArrayCollection $children;
 
+    public function __construct($entity)
+    {
+        $this->setEntity($entity);
+    }
+
+    public function setEntity ($entity)
+    {
+        $this->entity = $entity;
+    }
+
+    public function getEntity ()
+    {
+        return $this->entity;
+    }
 
     public function setParent(?Collaborator $parent)
     {

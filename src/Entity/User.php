@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\UserTrait;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use UserTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,14 +32,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Audit $audit = null;
-
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Collaborator $collaborator = null;
 
     public function getId(): ?int
     {
@@ -123,28 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAudit(): ?Audit
-    {
-        return $this->audit;
-    }
-
-    public function setAudit(?Audit $audit): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($audit === null && $this->audit !== null) {
-            $this->audit->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($audit !== null && $audit->getUser() !== $this) {
-            $audit->setUser($this);
-        }
-
-        $this->audit = $audit;
-
-        return $this;
-    }
-
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -165,6 +143,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCollaborator(): ?Collaborator
+    {
+        return $this->collaborator;
+    }
+
+    public function setCollaborator(Collaborator $collaborator): static
+    {
+        // set the owning side of the relation if necessary
+        if ($collaborator->getUser() !== $this) {
+            $collaborator->setUser($this);
+        }
+
+        $this->collaborator = $collaborator;
 
         return $this;
     }

@@ -3,34 +3,40 @@
 namespace App\Builder;
 
 use App\Composite\CabinetHierarchy\Director;
-use App\Repository\AuditRepository;
-use App\Repository\DirectorRepository;
-use App\Repository\TeamChiefRepository;
+use App\Composite\CabinetHierarchy\TeamChief;
+use App\Composite\CabinetHierarchy\Audit;
+use App\Repository\CollaboratorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class HierarchyBuilder
 {
+    private $repository;
+
+    public function __construct (CollaboratorRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function build($cabinet)
     {
-        $direction = $this->buildDirection($cabinet, new DirectorRepository());
+//        $direction = $this->buildDirection($cabinet);
+        $collaborators = $this->repository->findBy(['cabinet' => $cabinet]);
+        $hierarchy = new ArrayCollection();
 
+        $this->createHierarchy($collaborators, $hierarchy);
     }
 
-    public function buildDirection($cabinet, DirectorRepository $repository)
+    public function createHierarchy ($collaborators, $parent)
     {
-        $directors = $repository->findBy(['cabinet' => $cabinet]);
+        foreach ($collaborators as $collaborator)
+        {
+            $class = $collaborator->getClass();
+            $collab = new $class();
+            $parent->add($collab);
 
-        foreach ($directors as $director) {
-            $directeur = new Director();
+            if ($collaborator->getChildren()) {
+                $parent = $collab;
+            }
         }
-    }
-
-    public function buildTeamChiefs(&$directors, TeamChiefRepository $repository)
-    {
-
-    }
-
-    public function buildAudits(&$teamChiefs, AuditRepository $repository)
-    {
-
     }
 }
