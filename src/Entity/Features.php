@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FeaturesRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeaturesRepository::class)]
@@ -21,6 +22,9 @@ class Features
 
     #[ORM\Column(length: 255)]
     private ?string $link = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $parameters = null;
 
     public function getId(): ?int
     {
@@ -59,6 +63,18 @@ class Features
     public function setLink(string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getParameters(): ?array
+    {
+        return $this->parameters;
+    }
+
+    public function setParameters(?array $parameters): static
+    {
+        $this->parameters = $parameters;
 
         return $this;
     }

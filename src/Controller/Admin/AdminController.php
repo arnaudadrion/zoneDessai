@@ -8,6 +8,7 @@ use App\Repository\FeaturesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\Column\TwigColumn;
 use Omines\DataTablesBundle\DataTableFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +24,7 @@ class AdminController extends AbstractController
     public function listFeaturesAction(
         Request $request,
         DataTableFactory $dataTableFactory
-    ) : Response
+    ): Response
     {
         $table = $dataTableFactory->create()
             ->add('title', TextColumn::class, [
@@ -32,6 +33,11 @@ class AdminController extends AbstractController
             ])
             ->add('content', TextColumn::class, [
                 'label' => 'Descriptif'
+            ])
+            ->add('actions', TwigColumn::class, [
+                'label' => 'Editer',
+                'className' => 'buttons',
+                'template' => 'admin/edit_link.html.twig',
             ])
             ->createAdapter(ORMAdapter::class, [
                 'entity' => Features::class,
@@ -47,7 +53,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    public function data(Request $request, FeaturesRepository $repository)
+    public function data(Request $request, FeaturesRepository $repository): JsonResponse
     {
         if ($request->getMethod() === 'POST') {
             $draw = $request->get('draw');
@@ -95,7 +101,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/add-feature', name: 'add')]
-    public function addFeatureAction(Request $request, EntityManagerInterface $em,)
+    public function addFeatureAction(Request $request, EntityManagerInterface $em): Response
     {
         $newFeature = new Features();
         $form = $this->createForm(FeatureType::class, $newFeature);
@@ -110,6 +116,30 @@ class AdminController extends AbstractController
 
         return $this->render('admin/new.html.twig', [
            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/edit-feature/{featureId}', name: 'edit')]
+    public function editFeatureAction(
+        Request $request,
+        EntityManagerInterface $em,
+        FeaturesRepository $repository,
+        $featureId
+    ): Response
+    {
+        $feature = $repository->findOneBy(['id' => $featureId]);
+        $form = $this->createForm(FeatureType::class, $feature);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() &&$form->isValid()) {
+            $em->persist($feature);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_features_list');
+        }
+
+        return $this->render('admin/new.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

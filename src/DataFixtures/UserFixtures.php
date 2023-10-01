@@ -25,42 +25,49 @@ class UserFixtures extends Fixture
         $userDirector->setFirstname('Jean-Louis');
         $userDirector->setLastname('Machin');
         $userDirector->setEmail('machin@machin.com');
+        $userDirector->setRoles(["ROLE_USER"]);
         $userDirector->setUsername('machin@machin.com');
 
         $userTeamchief1 = new User();
         $userTeamchief1->setFirstname('Jean-Michel');
         $userTeamchief1->setLastname('Truc');
         $userTeamchief1->setEmail('truc@machin.com');
+        $userTeamchief1->setRoles(["ROLE_USER"]);
         $userTeamchief1->setUsername('truc@machin.com');
 
         $userTeamchief2 = new User();
         $userTeamchief2->setFirstname('Jean-René');
         $userTeamchief2->setLastname('Chouette');
         $userTeamchief2->setEmail('chouette@machin.com');
+        $userTeamchief2->setRoles(["ROLE_USER"]);
         $userTeamchief2->setUsername('chouette@machin.com');
 
         $userAudit1 = new User();
         $userAudit1->setFirstname('Jean-Théodore');
         $userAudit1->setLastname('Zut');
         $userAudit1->setEmail('zut@machin.com');
+        $userAudit1->setRoles(["ROLE_USER"]);
         $userAudit1->setUsername('zut@machin.com');
 
         $userAudit2 = new User();
         $userAudit2->setFirstname('Jean-Marie');
         $userAudit2->setLastname('Flute');
         $userAudit2->setEmail('flute@machin.com');
+        $userAudit2->setRoles(["ROLE_USER"]);
         $userAudit2->setUsername('flute@machin.com');
 
         $userAudit3 = new User();
         $userAudit3->setFirstname('Jean-Frédéric');
         $userAudit3->setLastname('Berlingot');
         $userAudit3->setEmail('berlingot@machin.com');
+        $userAudit3->setRoles(["ROLE_USER"]);
         $userAudit3->setUsername('berlingot@machin.com');
 
         $userAudit4 = new User();
         $userAudit4->setFirstname('Jean-Richard');
         $userAudit4->setLastname('Brignole');
         $userAudit4->setEmail('brignole@machin.com');
+        $userAudit4->setRoles(["ROLE_USER"]);
         $userAudit4->setUsername('brignole@machin.com');
 
         $manager->persist($userDirector);
