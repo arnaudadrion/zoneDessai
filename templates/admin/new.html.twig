@@ -6,7 +6,11 @@
         <a href="{{ path('admin_features_list') }}">Retour à la liste</a>
         <div id="features" class="my-5">
             {{ form_start(form) }}
-            {{ form_rest(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.content) }}
+            {{ form_row(form.link) }}
+            {{ form_label(form.name) }}
+            {{ form_label(form.value) }}
             {{ form_end(form) }}
         </div>
     </div>

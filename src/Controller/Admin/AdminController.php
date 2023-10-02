@@ -108,6 +108,9 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() &&$form->isValid()) {
+            if ($form->get('name')->getData() !== '' && $form->get('value')->getData() !== '') {
+                $newFeature->setParameters([$form->get('name')->getData() => $form->get('value')->getData()]);
+            }
             $em->persist($newFeature);
             $em->flush();
 
@@ -132,6 +135,9 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() &&$form->isValid()) {
+            if ($form->get('name')->getData() !== '' && $form->get('value')->getData() !== '') {
+                $feature->setParameters([$form->get('name')->getData() => $form->get('value')->getData()]);
+            }
             $em->persist($feature);
             $em->flush();
 

@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Features;
 use Symfony\Component\Form\AbstractType;;
-
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,16 +26,15 @@ class FeatureType extends AbstractType
             ->add('link', TextType::class, [
                 'label' => 'Nom de la route'
             ])
-            ->add('parameters', CollectionType::class, [
-                'entry_type' => ParameterType::class,
-                'label' => 'Paramètres optionnels de la route',
-                'required' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'label_attr' => ['class' => 'collection_controls allow_add allow_delete'],
+            ->add('name', TextType::class, [
+                'label' => 'Nom du parametre',
+                'mapped' => false
             ])
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('value', TextType::class, [
+                'label' => 'Valeur',
+                'mapped' => false
+            ])
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -43,5 +42,10 @@ class FeatureType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Features::class,
         ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'feature';
     }
 }

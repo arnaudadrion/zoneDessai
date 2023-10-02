@@ -26,4 +26,9 @@ class ParameterType extends AbstractType
     {
 
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'parameters';
+    }
 }
