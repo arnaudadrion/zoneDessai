@@ -7,25 +7,52 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 abstract class Collaborator
 {
-    private Entity $entity;
+    private int $collabId;
 
-    private $parent;
+    private string $name;
+
+    private string $email;
+
+    private Collaborator $parent;
 
     private ArrayCollection $children;
 
     public function __construct($entity)
     {
-        $this->setEntity($entity);
+        $this->children = new ArrayCollection();
+        $this->setCollabId($entity->getId());
+        $this->setName($entity->getUser()->getFullname());
+        $this->setEmail($entity->getUser()->getEmail());
     }
 
-    public function setEntity ($entity)
+    public function setCollabId($id)
     {
-        $this->entity = $entity;
+        $this->collabId = $id;
     }
 
-    public function getEntity ()
+    public function getCollabId()
     {
-        return $this->entity;
+        return $this->collabId;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     public function setParent(?Collaborator $parent)
@@ -38,14 +65,19 @@ abstract class Collaborator
         return $this->parent;
     }
 
-    public function add(Collaborator $collaborator): void
+    public function addChild(Collaborator $collaborator): void
     {
         $this->children->add($collaborator);
     }
 
-    public function remove(Collaborator $collaborator): void
+    public function removeChild(Collaborator $collaborator): void
     {
         $this->children->removeElement($collaborator);
+    }
+
+    public function getChildren(): ArrayCollection
+    {
+        return $this->children;
     }
 
     public function ascendentOperation() {}

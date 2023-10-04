@@ -5,37 +5,54 @@ namespace App\Builder;
 use App\Composite\CabinetHierarchy\Director;
 use App\Composite\CabinetHierarchy\TeamChief;
 use App\Composite\CabinetHierarchy\Audit;
+use App\Model\Cabinet\Cabinet;
 use App\Repository\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class HierarchyBuilder
 {
-    private $repository;
-
-    public function __construct (CollaboratorRepository $repository)
+    public function __construct(private CollaboratorRepository $repository)
     {
-        $this->repository = $repository;
+
     }
 
-    public function build($cabinet)
+    public function build($cabinetId)
     {
-//        $direction = $this->buildDirection($cabinet);
-        $collaborators = $this->repository->findBy(['cabinet' => $cabinet]);
+        $collaborators = $this->repository->findBy(['cabinet' => $cabinetId]);
+
+        return $this->createHierarchy($collaborators);;
+    }
+
+    public function createHierarchy ($collaborators)
+    {
         $hierarchy = new ArrayCollection();
-
-        $this->createHierarchy($collaborators, $hierarchy);
-    }
-
-    public function createHierarchy ($collaborators, $parent)
-    {
-        foreach ($collaborators as $collaborator)
+        foreach ($collaborators as $key => $collaborator)
         {
             $class = $collaborator->getClass();
-            $collab = new $class();
-            $parent->add($collab);
+            $collab = new $class($collaborator);
+
+            if ($key === 0) {
+                $hierarchy->add($collab);
+            }
 
             if ($collaborator->getChildren()) {
-                $parent = $collab;
+                $this->createChildren($collaborator->getChildren(), $collab);
+            }
+        }
+
+        return $hierarchy;
+    }
+
+    public function createChildren($collaborators, $parent)
+    {
+        foreach ($collaborators as $child) {
+            $class = $child->getClass();
+            $collab = new $class($child);
+            $parent->addChild($collab);
+            $collab->setParent($parent);
+
+            if ($child->getChildren()) {
+                $this->createChildren($child->getChildren(), $collab);
             }
         }
     }

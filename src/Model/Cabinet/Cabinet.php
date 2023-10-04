@@ -2,38 +2,38 @@
 
 namespace App\Model\Cabinet;
 
+use App\Entity\Cabinet as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Cabinet
 {
-    private string $name;
+    private Entity $entity;
 
-    private $hierachy;
+    private $hierarchy;
 
     private $dossiers;
 
     public function __construct()
     {
-        $this->hierachy = new ArrayCollection();
         $this->dossiers = new ArrayCollection();
     }
 
-    public function setName ($name)
+    public function setEntity (Entity $entity)
     {
-        $this->name = $name;
+        $this->entity = $entity;
     }
 
-    public function getName ()
+    public function getEntity ()
     {
-        return $this->name;
+        return $this->entity;
     }
 
-    public function setHierarchy ($hierachy)
+    public function setHierarchy ($hierarchy)
     {
-        $this->hierachy = $hierachy;
+        $this->hierarchy = $hierarchy;
     }
 
-    public function getHierachy ()
+    public function getHierarchy ()
     {
         return $this->hierarchy;
     }
