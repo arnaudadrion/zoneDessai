@@ -7,25 +7,39 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Cabinet
 {
-    private Entity $entity;
+    private $id;
+
+    private $name;
 
     private $hierarchy;
 
     private $dossiers;
 
-    public function __construct()
+    public function __construct(Entity $entity)
     {
         $this->dossiers = new ArrayCollection();
+        $this->setId($entity->getId());
+        $this->setName($entity->getName());
     }
 
-    public function setEntity (Entity $entity)
+    public function setId ($id)
     {
-        $this->entity = $entity;
+        $this->id = $id;
     }
 
-    public function getEntity ()
+    public function getId ()
     {
-        return $this->entity;
+        return $this->id;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function setHierarchy ($hierarchy)

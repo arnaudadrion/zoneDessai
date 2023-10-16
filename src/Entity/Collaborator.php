@@ -32,6 +32,9 @@ class Collaborator
     #[ORM\JoinColumn(nullable: false)]
     private ?Cabinet $cabinet = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $job = null;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -116,6 +119,18 @@ class Collaborator
     public function setCabinet(?Cabinet $cabinet): static
     {
         $this->cabinet = $cabinet;
+
+        return $this;
+    }
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(?string $job): static
+    {
+        $this->job = $job;
 
         return $this;
     }

@@ -27,13 +27,12 @@ class CabinetBuilder
     public function createCabinet(int $cabinetId, CabinetRepository $cabinetRepository)
     {
         $entity = $cabinetRepository->findOneBy(['id' => $cabinetId]);
-        $this->cabinet = new Cabinet();
-        $this->cabinet->setEntity($entity);
+        $this->cabinet = new Cabinet($entity);
     }
 
     public function buildHierarchy(HierarchyBuilder $builder)
     {
-        $hierarchy = $builder->build($this->cabinet->getEntity()->getId());
+        $hierarchy = $builder->build($this->cabinet->getId());
 
         $this->cabinet->setHierarchy($hierarchy);
     }

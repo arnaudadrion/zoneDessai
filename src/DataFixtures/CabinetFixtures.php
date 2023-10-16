@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Cabinet;
-use App\Entity\Collaborator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -14,6 +13,7 @@ class CabinetFixtures extends Fixture
     {
         $cabinet = new Cabinet();
         $cabinet->setName('Cabinet test');
+        $cabinet->setSlug('Cabinet test');
 
         $manager->persist($cabinet);
         $manager->flush();

@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Gedmo\Slug(fields: ['firstname', 'lastname'])]
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $slug = null;
+    private string $slug;
 
     public function getId(): ?int
     {

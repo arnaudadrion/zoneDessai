@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
@@ -24,6 +25,7 @@ class UserFixtures extends Fixture
         $userDirector = new User();
         $userDirector->setFirstname('Jean-Louis');
         $userDirector->setLastname('Machin');
+        $userDirector->setSlug('Jean-Louis Machin');
         $userDirector->setEmail('machin@machin.com');
         $userDirector->setRoles(["ROLE_USER"]);
         $userDirector->setUsername('machin@machin.com');
@@ -31,6 +33,7 @@ class UserFixtures extends Fixture
         $userTeamchief1 = new User();
         $userTeamchief1->setFirstname('Jean-Michel');
         $userTeamchief1->setLastname('Truc');
+        $userTeamchief1->setSlug('Jean-Michel Truc');
         $userTeamchief1->setEmail('truc@machin.com');
         $userTeamchief1->setRoles(["ROLE_USER"]);
         $userTeamchief1->setUsername('truc@machin.com');
@@ -38,6 +41,7 @@ class UserFixtures extends Fixture
         $userTeamchief2 = new User();
         $userTeamchief2->setFirstname('Jean-René');
         $userTeamchief2->setLastname('Chouette');
+        $userTeamchief2->setSlug('Jean-René Chouette');
         $userTeamchief2->setEmail('chouette@machin.com');
         $userTeamchief2->setRoles(["ROLE_USER"]);
         $userTeamchief2->setUsername('chouette@machin.com');
@@ -45,6 +49,7 @@ class UserFixtures extends Fixture
         $userAudit1 = new User();
         $userAudit1->setFirstname('Jean-Théodore');
         $userAudit1->setLastname('Zut');
+        $userAudit1->setSlug('Jean-Théodore Zut');
         $userAudit1->setEmail('zut@machin.com');
         $userAudit1->setRoles(["ROLE_USER"]);
         $userAudit1->setUsername('zut@machin.com');
@@ -52,6 +57,7 @@ class UserFixtures extends Fixture
         $userAudit2 = new User();
         $userAudit2->setFirstname('Jean-Marie');
         $userAudit2->setLastname('Flute');
+        $userAudit2->setSlug('Jean-Marie Flute');
         $userAudit2->setEmail('flute@machin.com');
         $userAudit2->setRoles(["ROLE_USER"]);
         $userAudit2->setUsername('flute@machin.com');
@@ -59,6 +65,7 @@ class UserFixtures extends Fixture
         $userAudit3 = new User();
         $userAudit3->setFirstname('Jean-Frédéric');
         $userAudit3->setLastname('Berlingot');
+        $userAudit3->setSlug('Jean-Frédéric Berlingot');
         $userAudit3->setEmail('berlingot@machin.com');
         $userAudit3->setRoles(["ROLE_USER"]);
         $userAudit3->setUsername('berlingot@machin.com');
@@ -66,6 +73,7 @@ class UserFixtures extends Fixture
         $userAudit4 = new User();
         $userAudit4->setFirstname('Jean-Richard');
         $userAudit4->setLastname('Brignole');
+        $userAudit4->setSlug('Jean-Richard Brignole');
         $userAudit4->setEmail('brignole@machin.com');
         $userAudit4->setRoles(["ROLE_USER"]);
         $userAudit4->setUsername('brignole@machin.com');
