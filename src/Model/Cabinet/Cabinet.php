@@ -11,7 +11,7 @@ class Cabinet
 
     private $name;
 
-    private $hierarchy;
+    private $collaborators;
 
     private $dossiers;
 
@@ -42,14 +42,14 @@ class Cabinet
         return $this->name;
     }
 
-    public function setHierarchy ($hierarchy)
+    public function setCollaborators(ArrayCollection $collaborators)
     {
-        $this->hierarchy = $hierarchy;
+        $this->collaborators = $collaborators;
     }
 
-    public function getHierarchy ()
+    public function getCollaborators() : ArrayCollection
     {
-        return $this->hierarchy;
+        return $this->collaborators;
     }
 
     public function openDossier ()

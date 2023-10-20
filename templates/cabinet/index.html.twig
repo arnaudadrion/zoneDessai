@@ -4,6 +4,14 @@
     <div class="container">
         <h2 class="">Cabinet {{ cabinet.name }}</h2>
         <div>
-
+            {% for collab in cabinet.collaborators %}
+                <div class="card">
+                    <h5 class="card-title">{{ collab.name }}</h5>
+                    <div class="card-body">
+                        <p>{{ collab.ascendentOperation }} : {% if collab.parent %}{{ collab.parent.name }}{% endif %}</p>
+                        <p>{{ collab.descendentOperation }}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 {% endblock %}

@@ -13,9 +13,9 @@ abstract class Collaborator
 
     private string $email;
 
-    private Collaborator $parent;
+    private ?Collaborator $parent = null;
 
-    private ArrayCollection $children;
+    private ?ArrayCollection $children = null;
 
     public function __construct($entity)
     {
@@ -60,7 +60,7 @@ abstract class Collaborator
         $this->parent = $parent;
     }
 
-    public function getParent(): Collaborator
+    public function getParent(): ?Collaborator
     {
         return $this->parent;
     }

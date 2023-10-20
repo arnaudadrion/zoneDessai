@@ -32,9 +32,9 @@ class CabinetBuilder
 
     public function buildHierarchy(HierarchyBuilder $builder)
     {
-        $hierarchy = $builder->build($this->cabinet->getId());
+        $collaborators = $builder->build($this->cabinet->getId());
 
-        $this->cabinet->setHierarchy($hierarchy);
+        $this->cabinet->setCollaborators($collaborators);
     }
 
     public function addDossiers(Cabinet $cabinet)

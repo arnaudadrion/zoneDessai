@@ -2,10 +2,6 @@
 
 namespace App\Builder;
 
-use App\Composite\CabinetHierarchy\Director;
-use App\Composite\CabinetHierarchy\TeamChief;
-use App\Composite\CabinetHierarchy\Audit;
-use App\Model\Cabinet\Cabinet;
 use App\Repository\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -26,34 +22,53 @@ class HierarchyBuilder
     public function createHierarchy ($collaborators)
     {
         $hierarchy = new ArrayCollection();
-        foreach ($collaborators as $key => $collaborator)
+        foreach ($collaborators as $collaborator)
         {
+            $isExists = $this->verifyExistence($hierarchy, $collaborator->getUser());
+
             $class = $collaborator->getClass();
             $collab = new $class($collaborator);
 
-            if ($key === 0) {
+            if (!$isExists) {
                 $hierarchy->add($collab);
             }
 
             if ($collaborator->getChildren()) {
-                $this->createChildren($collaborator->getChildren(), $collab);
+                $this->createChildren($collaborator->getChildren(), $collab, $hierarchy);
             }
         }
 
         return $hierarchy;
     }
 
-    public function createChildren($collaborators, $parent)
+    public function createChildren($collaborators, $parent, &$hierarchy)
     {
         foreach ($collaborators as $child) {
+            $isExists = $this->verifyExistence($hierarchy, $child->getUser());
+
             $class = $child->getClass();
             $collab = new $class($child);
-            $parent->addChild($collab);
-            $collab->setParent($parent);
+
+            if (!$isExists) {
+                $parent->addChild($collab);
+                $collab->setParent($parent);
+                $hierarchy->add($collab);
+            }
 
             if ($child->getChildren()) {
-                $this->createChildren($child->getChildren(), $collab);
+                $this->createChildren($child->getChildren(), $collab, $hierarchy);
             }
         }
+    }
+
+    private function verifyExistence($hierarchy, $user)
+    {
+        $name = $user->getFullName();
+
+        $isExists = $hierarchy->exists(function($key, $value) use ($name){
+            return $value->getName() === $name;
+        });
+
+        return $isExists;
     }
 }

@@ -15,7 +15,7 @@ class CabinetController extends AbstractController
     public function index(CabinetRepository $repository, CabinetBuilder $builder, HierarchyBuilder $hierarchyBuilder, $cabinetId)
     {
         $cabinet = $builder->build($cabinetId, $repository, $hierarchyBuilder);
-
+dump($cabinet);
         return $this->render('cabinet/index.html.twig', [
             'cabinet' => $cabinet
         ]);
