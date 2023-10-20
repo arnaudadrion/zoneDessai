@@ -19,21 +19,21 @@ class CollaboratorsFixtures extends Fixture implements DependentFixtureInterface
         $cabinet = $this->getReference(CabinetFixtures::CABINET_REFERENCE);
 
         $director = new Collaborator();
-        $director->setClass('App\Composite\CabinetHierarchy\Director');
+        $director->setClass('App\Composite\CabinetHierarchy\Manager');
         $director->setJob('Directeur du cabinet Test');
         $director->setCabinet($cabinet);
         $director->setUser($this->getReference(UserFixtures::USER_DIRECTOR));
 
         $teamChief1 = new Collaborator();
         $teamChief1->setCabinet($cabinet);
-        $teamChief1->setClass('App\Composite\CabinetHierarchy\TeamChief');
+        $teamChief1->setClass('App\Composite\CabinetHierarchy\Manager');
         $teamChief1->setJob('Chef de l\'équipe 1');
         $teamChief1->setParent($director);
         $teamChief1->setUser($this->getReference(UserFixtures::USER_TEAMCHIEF_1));
 
         $teamChief2 = new Collaborator();
         $teamChief2->setCabinet($cabinet);
-        $teamChief2->setClass('App\Composite\CabinetHierarchy\TeamChief');
+        $teamChief2->setClass('App\Composite\CabinetHierarchy\Manager');
         $teamChief2->setJob('Chef de l\'équipe 2');
         $teamChief2->setParent($director);
         $teamChief2->setUser($this->getReference(UserFixtures::USER_TEAMCHIEF_2));

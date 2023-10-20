@@ -3,46 +3,21 @@
 namespace App\Repository;
 
 use App\Entity\Collaborator;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
- * @extends ServiceEntityRepository<Collaborator>
  *
  * @method Collaborator|null find($id, $lockMode = null, $lockVersion = null)
  * @method Collaborator|null findOneBy(array $criteria, array $orderBy = null)
  * @method Collaborator[]    findAll()
  * @method Collaborator[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CollaboratorRepository extends ServiceEntityRepository
+class CollaboratorRepository extends NestedTreeRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Collaborator::class);
+        parent::__construct($registry, new ClassMetadata(Collaborator::class));
     }
-
-//    /**
-//     * @return Collaborator[] Returns an array of Collaborator objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Collaborator
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

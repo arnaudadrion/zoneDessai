@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
+#[Gedmo\Tree(type: "nested")]
 #[ORM\Entity(repositoryClass: CollaboratorRepository::class)]
 class Collaborator
 {
@@ -15,7 +18,9 @@ class Collaborator
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'user')]
+    #[Gedmo\TreeParent]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
@@ -34,6 +39,23 @@ class Collaborator
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $job = null;
+
+    #[Gedmo\TreeLeft]
+    #[ORM\Column(name: 'lft', type: Types::INTEGER)]
+    private $lft;
+
+    #[Gedmo\TreeLevel]
+    #[ORM\Column(name: 'lvl', type: Types::INTEGER)]
+    private $lvl;
+
+    #[Gedmo\TreeRight]
+    #[ORM\Column(name: 'rgt', type: Types::INTEGER)]
+    private $rgt;
+
+    #[Gedmo\TreeRoot]
+    #[ORM\ManyToOne(targetEntity: Collaborator::class)]
+    #[ORM\JoinColumn(name: 'tree_root', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    private $root;
 
     public function __construct()
     {
@@ -133,5 +155,45 @@ class Collaborator
         $this->job = $job;
 
         return $this;
+    }
+
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+    }
+
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+    }
+
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    public function setLvl(int $lvl)
+    {
+        $this->lvl = $lvl;
+    }
+
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    public function setRoot(int $root)
+    {
+        $this->root = $root;
+    }
+
+    public function getRoot()
+    {
+        return $this->root;
     }
 }
