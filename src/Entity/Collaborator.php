@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 #[Gedmo\Tree(type: "nested")]
 #[ORM\Entity(repositoryClass: CollaboratorRepository::class)]
@@ -24,6 +25,7 @@ class Collaborator
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    #[ORM\OrderBy(['lft' => 'ASC'])]
     private Collection $children;
 
     #[ORM\OneToOne(inversedBy: 'collaborator', cascade: ['persist', 'remove'])]
@@ -38,23 +40,23 @@ class Collaborator
     private ?Cabinet $cabinet = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $job = null;
+    private ?string $title = null;
 
     #[Gedmo\TreeLeft]
     #[ORM\Column(name: 'lft', type: Types::INTEGER)]
-    private $lft;
+    private int $lft;
 
     #[Gedmo\TreeLevel]
     #[ORM\Column(name: 'lvl', type: Types::INTEGER)]
-    private $lvl;
+    private int $lvl;
 
     #[Gedmo\TreeRight]
     #[ORM\Column(name: 'rgt', type: Types::INTEGER)]
-    private $rgt;
+    private int $rgt;
 
     #[Gedmo\TreeRoot]
     #[ORM\ManyToOne(targetEntity: Collaborator::class)]
-    #[ORM\JoinColumn(name: 'tree_root', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'root', referencedColumnName: 'id', nullable:true, onDelete: 'CASCADE')]
     private $root;
 
     public function __construct()
@@ -145,14 +147,14 @@ class Collaborator
         return $this;
     }
 
-    public function getJob(): ?string
+    public function getTitle(): ?string
     {
-        return $this->job;
+        return $this->title;
     }
 
-    public function setJob(?string $job): static
+    public function setTitle(?string $title): static
     {
-        $this->job = $job;
+        $this->title = $title;
 
         return $this;
     }
@@ -187,7 +189,7 @@ class Collaborator
         return $this->lvl;
     }
 
-    public function setRoot(int $root)
+    public function setRoot($root)
     {
         $this->root = $root;
     }

@@ -13,6 +13,8 @@ abstract class Collaborator
 
     private string $email;
 
+    private string $title;
+
     private ?Collaborator $parent = null;
 
     private ?ArrayCollection $children = null;
@@ -23,6 +25,7 @@ abstract class Collaborator
         $this->setCollabId($entity->getId());
         $this->setName($entity->getUser()->getFullname());
         $this->setEmail($entity->getUser()->getEmail());
+        $this->setTitle($entity->getTitle());
     }
 
     public function setCollabId($id)
@@ -78,6 +81,16 @@ abstract class Collaborator
     public function getChildren(): ArrayCollection
     {
         return $this->children;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 
     public function ascendentOperation() {}

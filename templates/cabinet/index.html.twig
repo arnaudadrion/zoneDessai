@@ -3,11 +3,16 @@
 {% block body %}
     <div class="container">
         <h2 class="">Cabinet {{ cabinet.name }}</h2>
+
+{#        <div>#}
+{#            {{ organigramme|raw }}#}
+{#        </div>#}
         <div>
             {% for collab in cabinet.collaborators %}
                 <div class="card">
                     <h5 class="card-title">{{ collab.name }}</h5>
                     <div class="card-body">
+                        <p>Fonction : {{ collab.job }}</p>
                         <p>{{ collab.ascendentOperation }} : {% if collab.parent %}{{ collab.parent.name }}{% endif %}</p>
                         <p>{{ collab.descendentOperation }}</p>
                     </div>

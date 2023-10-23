@@ -13,6 +13,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
+        "gedmo/doctrine-extensions": "^3.13",
         "omines/datatables-bundle": "^0.7.2",
         "stof/doctrine-extensions-bundle": "*",
         "symfony/console": "6.3.*",
