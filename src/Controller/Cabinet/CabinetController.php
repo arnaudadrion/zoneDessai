@@ -4,7 +4,6 @@ namespace App\Controller\Cabinet;
 
 use App\Builder\CabinetBuilder;
 use App\Builder\HierarchyBuilder;
-use App\Entity\Collaborator;
 use App\Repository\CabinetRepository;
 use App\Repository\CollaboratorRepository;
 use Doctrine\ORM\EntityManagerInterface;

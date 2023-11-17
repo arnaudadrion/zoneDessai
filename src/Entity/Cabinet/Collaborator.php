@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Cabinet;
 
+use App\Entity\User;
 use App\Repository\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 #[Gedmo\Tree(type: "nested")]
 #[ORM\Entity(repositoryClass: CollaboratorRepository::class)]

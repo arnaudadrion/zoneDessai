@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Collaborator;
+use App\Entity\Cabinet\Collaborator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;

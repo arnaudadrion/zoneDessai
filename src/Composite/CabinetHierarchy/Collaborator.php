@@ -2,7 +2,6 @@
 
 namespace App\Composite\CabinetHierarchy;
 
-use App\Entity\Collaborator as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 abstract class Collaborator

@@ -2,7 +2,7 @@
 
 namespace App\Model\Cabinet;
 
-use App\Entity\Cabinet as Entity;
+use App\Entity\Cabinet\Cabinet as Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Cabinet

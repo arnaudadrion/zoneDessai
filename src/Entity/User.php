@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Cabinet\Collaborator;
 use App\Entity\Trait\UserTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;

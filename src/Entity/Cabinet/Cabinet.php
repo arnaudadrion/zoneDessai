@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Cabinet;
 
 use App\Repository\CabinetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
