@@ -7,15 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ChoiceQuestionRepository::class)
- */
+#[ORM\Entity(repositoryClass: ChoiceQuestionRepository::class)]
 class ChoiceQuestion extends AbstractQuestion
 {
-    /**
-     * @var Choice[]
-     * @ORM\OneToMany(targetEntity=Choice::class, mappedBy="question", cascade={"persist"})
-     */
+    #[ORM\OneToMany(mappedBy: "question", targetEntity: Choice::class, cascade: ["persist"])]
     private $choices;
 
     public function __construct()

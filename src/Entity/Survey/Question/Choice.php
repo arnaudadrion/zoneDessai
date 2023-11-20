@@ -7,49 +7,31 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-/**
- * @ORM\Entity(repositoryClass=ChoiceRepository::class)
- * @ORM\Table(name="question_choice")
- */
+#[ORM\Entity(repositoryClass: ChoiceRepository::class)]
+#[ORM\Table(name: "question_choice")]
 class Choice
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @var string
-     * @ORM\Column(type="text")
-     */
-    private $label;
+    #[ORM\Column(type: "text")]
+    private string $label;
 
-    /**
-     * @var string
-     * @ORM\Column(type="text")
-     */
-    private $value;
+    #[ORM\Column(type: "text")]
+    private string $value;
 
-    /**
-     * @var float
-     * @ORM\Column(type="float")
-     */
+    #[ORM\Column(type: "float")]
     private $weight;
 
-    /**
-     * @var AbstractQuestion
-     * @ORM\ManyToOne(targetEntity=AbstractQuestion::class, inversedBy="choices", cascade={"persist"})
-     */
+    #[ORM\ManyToOne(targetEntity: AbstractQuestion::class, cascade: ["persist"], inversedBy: "choices")]
     private $question;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(length: 255, nullable: true)]
     private $transchain;
 
     /**
@@ -105,25 +87,13 @@ class Choice
         return $this->getLabel();
     }
 
-    /**
-     * Set transchain
-     *
-     * @param string $transchain
-     *
-     * @return AbstractQuestion
-     */
-    public function setTranschain($transchain)
+    public function setTranschain($transchain): Choice
     {
         $this->transchain = $transchain;
 
         return $this;
     }
 
-    /**
-     * Get transchain
-     *
-     * @return string
-     */
     public function getTranschain()
     {
         return $this->transchain;

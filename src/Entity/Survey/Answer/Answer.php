@@ -2,9 +2,9 @@
 
 namespace App\Entity\Survey\Answer;
 
-use App\Entity\Project\Project;
 use App\Entity\Survey\Question\AbstractQuestion;
 use App\Entity\Survey\Question\Choice;
+use App\Entity\User;
 use App\Repository\Survey\Answer\AnswerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,49 +13,33 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-/**
- * @ORM\Table(name="answer")
- * @ORM\Entity(repositoryClass=AnswerRepository::class)
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
- */
+#[ORM\Entity(repositoryClass: AnswerRepository::class)]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
 class Answer
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
 
-    /**
-     * @var AbstractQuestion
-     * @ORM\ManyToOne(targetEntity=AbstractQuestion::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected $question;
+    #[ORM\ManyToOne(targetEntity: AbstractQuestion::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    protected AbstractQuestion $question;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="answers")
-     */
-    protected $project;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "answers")]
+    protected User $user;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $value;
+    #[ORM\Column(length: 255, nullable: true)]
+    private string $value;
 
-    /**
-     * @var Choice[]
-     * @ORM\ManyToMany(targetEntity=Choice::class)
-     * @ORM\JoinTable(name="answer_choice",
-     *      joinColumns={@ORM\JoinColumn(name="id_answer", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_choice", referencedColumnName="id")}
-     * )
-     */
-    private $choices;
+    #[ORM\ManyToMany(targetEntity: Choice::class)]
+    #[ORM\JoinTable(name: "answer_choice")]
+    #[JoinColumn(name: "id_answer", referencedColumnName: "id")]
+    #[InverseJoinColumn(name: "id_choice", referencedColumnName: "id")]
+    private Collection $choices;
 
     public function __construct()
     {
@@ -67,18 +51,12 @@ class Answer
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
+    public function setValue(mixed $value)
     {
         $this->value = $value;
     }
@@ -156,27 +134,15 @@ class Answer
         return $result;
     }
 
-    /**
-     * Set project
-     *
-     * @param \App\Entity\Project\Project $project
-     *
-     * @return Answer
-     */
-    public function setProject(\App\Entity\Project\Project $project = null)
+    public function setUser(User $user = null): self
     {
-        $this->project = $project;
+        $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * Get project
-     *
-     * @return \App\Entity\Project\Project
-     */
-    public function getProject()
+    public function getUser()
     {
-        return $this->project;
+        return $this->user;
     }
 }

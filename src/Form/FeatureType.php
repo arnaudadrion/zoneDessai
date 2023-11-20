@@ -28,11 +28,13 @@ class FeatureType extends AbstractType
             ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du parametre',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add('value', TextType::class, [
                 'label' => 'Valeur',
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add('submit', SubmitType::class);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Cabinet;
 
 use App\Entity\Cabinet\Cabinet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

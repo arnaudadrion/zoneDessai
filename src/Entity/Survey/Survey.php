@@ -9,39 +9,28 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
-/**
- * @ORM\Entity(repositoryClass=SurveyRepository::class)
- */
+
+#[ORM\Entity(repositoryClass: SurveyRepository::class)]
 class Survey
 {
     use SoftDeleteableEntity;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(length: 255, unique: true)]
+    private string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
+    #[ORM\Column(length: 255, unique: true)]
+    private string $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity=AbstractQuestion::class, mappedBy="survey", orphanRemoval=true, cascade={"persist", "remove"})
-     */
+    #[ORM\OneToMany(mappedBy: 'survey', targetEntity: AbstractQuestion::class)]
     private $questions;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $transchain;
+    #[ORM\Column(length: 255, unique: true)]
+    private string $transchain;
 
     public function __construct()
     {
@@ -53,45 +42,31 @@ class Survey
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+
+    public function getName() : ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return $this
-     */
-    public function setName(string $name)
+    public function setName(string $name) : self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug() : ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @return $this
-     */
-    public function setSlug(string $slug)
+    public function setSlug(string $slug) : self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * @return Collection|AbstractQuestion[]
-     */
     public function getQuestions(): Collection
     {
         return $this->questions;
@@ -130,26 +105,14 @@ class Survey
         return $maximumScore;
     }
 
-    /**
-     * Set transchain
-     *
-     * @param string $transchain
-     *
-     * @return Survey
-     */
-    public function setTranschain($transchain)
+    public function setTranschain($transchain): self
     {
         $this->transchain = $transchain;
 
         return $this;
     }
 
-    /**
-     * Get transchain
-     *
-     * @return string
-     */
-    public function getTranschain()
+    public function getTranschain(): string
     {
         return $this->transchain;
     }

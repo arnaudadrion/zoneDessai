@@ -4,8 +4,8 @@ namespace App\Controller\Cabinet;
 
 use App\Builder\CabinetBuilder;
 use App\Builder\HierarchyBuilder;
-use App\Repository\CabinetRepository;
-use App\Repository\CollaboratorRepository;
+use App\Repository\Cabinet\CabinetRepository;
+use App\Repository\Cabinet\CollaboratorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

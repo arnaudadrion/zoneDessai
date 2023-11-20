@@ -9,55 +9,43 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-/**
- * @ORM\Table(name="question")
- * @ORM\Entity(repositoryClass=AbstractQuestionRepository::class)
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *     "text" = "TextQuestion",
- *     "multiple" = "MultipleChoiceQuestion",
- *     "choice" = "ChoiceQuestion",
- *     "integer" = "IntegerQuestion",
- *     "float" = "FloatQuestion",
- *     "bool" = "BooleanQuestion",
- *     "order" = "OrderQuestion",
- * })
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
- */
+#[Entity]
+#[Table(name: "question", schema: "schema_name")]
+#[ORM\Entity(repositoryClass: AbstractQuestionRepository::class)]
+#[ORM\InheritanceType("SINGLE_TABLE")]
+#[ORM\DiscriminatorColumn(name:"type", type:"string")]
+#[ORM\DiscriminatorMap([
+      "text" => TextQuestion::class,
+      "multiple" => MultipleChoiceQuestion::class,
+      "choice" => ChoiceQuestion::class,
+      "integer" => IntegerQuestion::class,
+      "float" => FloatQuestion::class,
+      "bool" => BooleanQuestion::class,
+      "order" => OrderQuestion::class,
+  ])]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
 abstract class AbstractQuestion
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $label;
+    #[ORM\Column(length: 255, nullable: true)]
+    private string $label;
 
-    /**
-     * @var float
-     * @ORM\Column(type="float")
-     */
-    private $weight = 1;
+    #[ORM\Column(type: "float")]
+    private float $weight = 1;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Survey::class, inversedBy="questions")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Survey::class, inversedBy: "questions")]
+    #[ORM\JoinColumn(nullable: false)]
     private $survey;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $transchain;
+    #[ORM\Column(length: 255, nullable: true)]
+    private string $transchain;
 
     public function getId(): int
     {

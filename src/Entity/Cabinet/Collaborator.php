@@ -3,7 +3,7 @@
 namespace App\Entity\Cabinet;
 
 use App\Entity\User;
-use App\Repository\CollaboratorRepository;
+use App\Repository\Cabinet\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;

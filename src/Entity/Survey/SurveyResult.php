@@ -6,33 +6,23 @@ use App\Repository\Survey\SurveyResultRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
-/**
- * @ORM\Entity(repositoryClass=SurveyResultRepository::class)
- */
+#[ORM\Entity(repositoryClass: SurveyResultRepository::class)]
 class SurveyResult
 {
     use SoftDeleteableEntity;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $score;
+    #[ORM\Column]
+    private float $score;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $trustScore;
+    #[ORM\Column]
+    private float $trustScore;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Survey::class)
-     */
+    #[ORM\ManyToOne(targetEntity: Survey::class)]
     private $survey;
 
     public function getId()
@@ -40,9 +30,6 @@ class SurveyResult
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getScore(): float
     {
         return $this->score;

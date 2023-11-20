@@ -2,7 +2,7 @@
 
 namespace App\Builder;
 
-use App\Repository\CollaboratorRepository;
+use App\Repository\Cabinet\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class HierarchyBuilder

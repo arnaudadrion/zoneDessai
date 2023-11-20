@@ -2,7 +2,7 @@
 
 namespace App\Entity\Cabinet;
 
-use App\Repository\CabinetRepository;
+use App\Repository\Cabinet\CabinetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

@@ -3,8 +3,7 @@
 namespace App\Builder;
 
 use App\Model\Cabinet\Cabinet;
-use App\Repository\CabinetRepository;
-use App\Repository\CollaboratorRepository;
+use App\Repository\Cabinet\CabinetRepository;
 
 class CabinetBuilder
 {

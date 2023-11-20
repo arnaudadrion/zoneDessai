@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Cabinet;
 
 use App\Entity\Cabinet\Collaborator;
 use Doctrine\ORM\EntityManagerInterface;
