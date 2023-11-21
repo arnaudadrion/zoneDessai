@@ -24,19 +24,6 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
-    public function countTotalWistartAnswers() {
-        $qb = $this->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->innerJoin('a.question', 'q')
-            ->innerJoin('q.survey', 's');
-
-        $qb
-            ->where($qb->expr()->in('s.slug', ':wistartSlugs'))
-            ->setParameter('wistartSlugs', SurveyWistartEnum::getWistartSurveys());
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
     public function findByUserAndSurvey(User $user, Survey $survey)
     {
         $qb = $this->createQueryBuilder('a')
@@ -57,33 +44,6 @@ class AnswerRepository extends ServiceEntityRepository
             ->innerJoin(Survey::class, 's', 'WITH', 's.id = :survey')
             ->innerJoin(AbstractQuestion::class, 'q', 'WITH', 'a.question = q.id AND q.survey = s.id')
             ->setParameter('user', $user)
-            ->setParameter('survey', $survey);
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findByProjectAndSurvey(Project $project, Survey $survey)
-    {
-        $qb = $this->createQueryBuilder('a')
-            ->innerJoin('a.project', 'p')
-            ->innerJoin('a.question', 'q')
-            ->innerJoin('q.survey', 's')
-            ->where('p.id = :project')
-            ->andWhere('s.id = :survey')
-            ->setParameter('project', $project)
-            ->setParameter('survey', $survey);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findProjectAnswer(Project $project, Survey $survey)
-    {
-        $qb = $this->createQueryBuilder('a')
-            ->select('COUNT(a.id)')
-            ->innerJoin(Project::class, 'p', 'WITH', 'a.project = p.id AND p.id = :project')
-            ->innerJoin(Survey::class, 's', 'WITH', 's.id = :survey')
-            ->innerJoin(AbstractQuestion::class, 'q', 'WITH', 'a.question = q.id AND q.survey = s.id')
-            ->setParameter('project', $project)
             ->setParameter('survey', $survey);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
