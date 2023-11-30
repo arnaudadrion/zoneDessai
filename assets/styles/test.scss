@@ -1,0 +1,67 @@
+$cd-btn: #011c37;
+$cd-txt: #15DEA5;
+$cd-ball: #AA0000;
+$ball-size: 10rem;
+$cd-or: gold;
+
+.btn-test {
+    background: $cd-btn;
+    color: $cd-txt;
+    transition: transform 200ms;
+    &:hover {
+        transform: scale(1.15);
+    }
+}
+
+.btn-ball {
+    background: $cd-btn;
+    color: $cd-txt;
+    cursor: pointer;
+    &:hover + .ball{
+        transform: scale(1.0);
+    }
+}
+
+.ball {
+    width: $ball-size;
+    height: $ball-size;
+    background: $cd-ball;
+    margin-bottom: 1rem;
+    border-radius: $ball-size * 0.5;
+    transform: scale(0.1);
+    transition: transform 4000ms ease-in-out;
+}
+
+.x {
+    height: 100px;
+    width: 100px;
+    position: relative;
+
+    &:hover > .skew1 {
+        transform: skewX(-45deg);
+    }
+
+    &:hover > .skew2 {
+        transform: skewX(45deg);
+    }
+}
+
+.or {
+    height: 100px;
+    width: 10px;
+    position: absolute;
+    left: 45px;
+    background-color: $cd-or;
+}
+
+.skew1 {
+    transform: skewX(45deg);
+    transition: transform 700ms ease-in-out;
+}
+
+.skew2 {
+    transform: skewX(-45deg);
+    transition: transform 700ms ease-in-out;
+}
+
+

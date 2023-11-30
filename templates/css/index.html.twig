@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('test-css') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h2 class="">Zone de test CSS</h2>
+    <div>
+        <button class="btn-test">
+            Vois comme je grandis !
+        </button>
+    </div>
+
+    <div>
+        <button class="btn-ball">
+            C'est partiii!
+        </button>
+        <div class="ball"></div>
+    </div>
+
+    <div class="x">
+        <div class="or skew1"></div>
+        <div class="or skew2"></div>
+    </div>
+
+{% endblock %}

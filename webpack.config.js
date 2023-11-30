@@ -23,6 +23,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('omines-datatable', './vendor/omines/datatables-bundle/src/Resources/public/js/datatables.js')
     .addStyleEntry('app-css', './assets/styles/app.scss')
+    .addStyleEntry('test-css', './assets/styles/test.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
