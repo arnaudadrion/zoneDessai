@@ -20,7 +20,7 @@ class CollaboratorsFixtures extends Fixture implements DependentFixtureInterface
 
         $director = new Collaborator();
         $director->setClass('App\Composite\CabinetHierarchy\Manager');
-        $director->setJob('Directeur du cabinet Test');
+        $director->setTitle('Directeur du cabinet Test');
         $director->setCabinet($cabinet);
         $director->setUser($this->getReference(UserFixtures::USER_DIRECTOR));
 

@@ -32,9 +32,21 @@ class FeaturesFixtures extends Fixture
         $feature3->setLink('cabinet_index');
         $feature3->setParameters(['cabinetId' => $cabinet->getId()]);
 
+        $feature4 = new Features();
+        $feature4->setTitle('Survey');
+        $feature4->setContent('Système de formualaire dynamique');
+        $feature4->setLink('survey_index');
+
+        $feature5 = new Features();
+        $feature5->setTitle('FrontEnd');
+        $feature5->setContent('Zone de test frontend');
+        $feature5->setLink('css_index');
+
         $manager->persist($feature1);
         $manager->persist($feature2);
         $manager->persist($feature3);
+        $manager->persist($feature4);
+        $manager->persist($feature5);
 
         $manager->flush();
     }
