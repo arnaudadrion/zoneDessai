@@ -167,6 +167,7 @@ function draw() {
 
     requestAnimationFrame(draw);
 }
-if(gameBegin) {
-    draw();
-}
+draw();
+// if(gameBegin) {
+//     draw();
+// }
