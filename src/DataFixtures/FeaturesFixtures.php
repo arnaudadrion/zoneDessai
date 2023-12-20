@@ -33,8 +33,8 @@ class FeaturesFixtures extends Fixture
         $feature3->setParameters(['cabinetId' => $cabinet->getId()]);
 
         $feature4 = new Features();
-        $feature4->setTitle('Survey');
-        $feature4->setContent('Système de formualaire dynamique');
+        $feature4->setTitle('Questionnaire');
+        $feature4->setContent('Système de questionnaire dynamique');
         $feature4->setLink('survey_index');
 
         $feature5 = new Features();

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Survey\Survey;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,11 @@ class SurveyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
+            ->add('traduction', TextType::class, [
+                'label' => 'Traduction',
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('transchain')
             ->add('submit', SubmitType::class);
     }

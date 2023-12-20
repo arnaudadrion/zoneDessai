@@ -5,6 +5,7 @@ namespace App\Controller\Survey;
 use App\Entity\Survey\Survey;
 use App\Form\SurveyType;
 use App\Repository\Survey\SurveyRepository;
+use App\Services\XML\XMLTranslation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +22,23 @@ class SurveyController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, XMLTranslation $xml): Response
     {
         $survey = new Survey();
         $form = $this->createForm(SurveyType::class, $survey);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $docsInfo = ['transchain' => $form->getData()->getTranschain(), 'langs' => ['fr', 'en']];
+            $name = $form->getData()->getName();
+
+            $toAdd = ['fr' => ['source' => $name, 'target' => $name],
+                      'en' => ['source' => $name, 'target' => $request->request->all()['survey']['traduction']]
+                      ];
+
+            $xml->addTranslation($docsInfo, $toAdd);
+
             $entityManager->persist($survey);
             $entityManager->flush();
 
