@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file original="translation" source-language="fr" target-language="en" datatype="plaintext">
-        <body>
-            <trans-unit id="translation_save" resname="translation.save">
-               <source xml:lang="fr">Enregistrer</source>
-               <target xml:lang="en">Save</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file original="translation" source-language="fr" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="translation_save" resname="translation.save">
+        <source xml:lang="fr">Enregistrer</source>
+        <target xml:lang="en">Save</target>
+      </trans-unit>
+      <trans-unit id="translation.test_survey" resname="translation.test_survey">
+        <source xml:lang="fr">Questionnaire Test</source>
+        <target xml:lang="en">Test Survey</target>
+      </trans-unit>
+      <trans-unit id="translation.test_survey658423aa46148" resname="translation.test_survey658423aa46148">
+        <source xml:lang="fr">Questionnaire Test</source>
+        <target xml:lang="en">Test Survey</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

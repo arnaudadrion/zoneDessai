@@ -22,12 +22,8 @@ class XMLTranslation
     )
     {
         $this->dom = new DOMDocument();
-        $this->dom->preserveWhiteSpace = true;
-    }
-
-    public function getDom(): DOMDocument
-    {
-        return $this->dom;
+        $this->dom->preserveWhiteSpace = false;
+        $this->dom->formatOutput = true;
     }
 
 
@@ -36,11 +32,11 @@ class XMLTranslation
         if (!file_exists($this->prefix.$docName)) {
             $this->createNewDocument($docName);
         } else {
-            $this->dom->load($this->prefix.$docName, LIBXML_NOBLANKS);
+            $this->dom->load($this->prefix.$docName);
         }
     }
 
-    public function addTranslation(Array $docsInfos, Array $toAdd): void
+    public function addTranslation(Array $docsInfos, Array $toAdd): string
     {
         $this->transchain = $docsInfos['transchain'];
         foreach ($docsInfos['langs'] as $lang) {
@@ -50,8 +46,10 @@ class XMLTranslation
             $this->openDocument($docName);
             $this->addTransUnit($toAdd, $lang);
 
-//            $this->dom->save($this->prefix.$docName);
+            $this->dom->save($this->prefix.$docName);
         }
+
+        return $this->transchain;
     }
 
     public function addTransUnit(Array $toAdd, $lang): void
@@ -66,12 +64,14 @@ class XMLTranslation
             $transUnit->appendChild($resnameAttr);
 
             $source = $this->dom->createElement('source', $toAdd[$lang]['source']);
-            $langAttr = $this->dom->createAttribute('xml:lang');
-            $langAttr->value = 'fr';
-            $source->appendChild($langAttr);
+            $sourceLangAttr = $this->dom->createAttribute('xml:lang');
+            $sourceLangAttr->value = 'fr';
+            $source->appendChild($sourceLangAttr);
+
             $target = $this->dom->createElement('target', $toAdd[$lang]['target']);
-            $langAttr->value = $lang;
-            $target->appendChild($langAttr);
+            $targetLangAttr = $this->dom->createAttribute('xml:lang');
+            $targetLangAttr->value = $lang;
+            $target->appendChild($targetLangAttr);
 
             $transUnit->appendChild($source);
             $transUnit->appendChild($target);
@@ -80,6 +80,9 @@ class XMLTranslation
             $lastTransUnit = $transUnits->item($transUnits->count() - 1);
 
             $lastTransUnit->after($transUnit);
+        } else {
+            $this->transchain = $this->transchain.uniqid();
+            $this->addTransUnit($toAdd, $lang);
         }
     }
 

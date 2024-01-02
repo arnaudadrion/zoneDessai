@@ -37,12 +37,16 @@ class SurveyController extends AbstractController
                       'en' => ['source' => $name, 'target' => $request->request->all()['survey']['traduction']]
                       ];
 
-            $xml->addTranslation($docsInfo, $toAdd);
+            $realTranschain = $xml->addTranslation($docsInfo, $toAdd);
+
+            if ($realTranschain !== $form->getData()->getTranschain()) {
+                $survey->setTranschain($realTranschain);
+            }
 
             $entityManager->persist($survey);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_survey_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('survey_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('survey/new.html.twig', [

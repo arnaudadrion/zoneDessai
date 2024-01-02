@@ -14,7 +14,7 @@ class SurveyResult
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column]
     private float $score;
@@ -23,7 +23,7 @@ class SurveyResult
     private float $trustScore;
 
     #[ORM\ManyToOne(targetEntity: Survey::class)]
-    private $survey;
+    private ?int $survey;
 
     public function getId()
     {

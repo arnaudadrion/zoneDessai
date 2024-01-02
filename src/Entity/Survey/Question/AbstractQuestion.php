@@ -32,7 +32,7 @@ abstract class AbstractQuestion
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(length: 255, nullable: true)]
     private string $label;
