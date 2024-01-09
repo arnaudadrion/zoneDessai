@@ -15,16 +15,20 @@
             </thead>
             <tbody>
             {% for survey in surveys %}
+
                 <tr>
                     <td>{{ survey.id }}</td>
                     <td>{{ survey.name }}</td>
                     <td>{{ survey.questions|length }}</td>
                     <td>
-                        <a class="btn btn-secondary text-white" href="{{ path('survey_show', {'id': survey.id}) }}">
+                        <a class="btn btn-secondary text-white" href="{{ path('survey_show', {'id': survey.id}) }}" title="Voir le questionnaire">
                             <i class="fa-regular fa-eye"></i>
                         </a>
-                        <a class="btn btn-secondary text-white"  href="{{ path('survey_edit', {'id': survey.id}) }}">
+                        <a class="btn btn-secondary text-white"  href="{{ path('survey_edit', {'id': survey.id}) }}" title="modifier le questionnaire">
                             <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                        <a class="btn btn-secondary text-white" href="{{ path('survey_question_index', {'id': survey.id}) }}" title="Ajouter des questions">
+                            <i class="fa-solid fa-plus"></i>
                         </a>
                     </td>
                 </tr>

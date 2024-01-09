@@ -20,15 +20,4 @@ class AbstractQuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, AbstractQuestion::class);
     }
 
-    public function countWistartQuestions() {
-        $qb = $this->createQueryBuilder('q')
-            ->select('COUNT(q.id)')
-            ->innerJoin('q.survey', 's');
-
-        $qb
-            ->where($qb->expr()->in('s.slug', ':wistartSlugs'))
-            ->setParameter('wistartSlugs', SurveyWistartEnum::getWistartSurveys());
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
 }

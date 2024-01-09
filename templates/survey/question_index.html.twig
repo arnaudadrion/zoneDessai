@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="">Questionnaire {{ survey.transchain|trans({}, 'translation') }}</h2>
+
+        <table class="table table-striped table-bordered dt-responsive nowrap datatable">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitulé</th>
+                <th>Ponderation</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in survey.questions %}
+                <tr>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.label }}</td>
+                    <td>{{ question.weight }}</td>
+                    <td>
+                        <a class="btn btn-secondary text-white" href="{{ path('survey_question_show', {'id': question.id}) }}" title="Voir la question">
+                            <i class="fa-regular fa-eye"></i>
+                        </a>
+                        <a class="btn btn-secondary text-white"  href="{{ path('survey_question_edit', {'id': question.id}) }}" title="modifier la question">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

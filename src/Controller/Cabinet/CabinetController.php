@@ -46,4 +46,10 @@ class CabinetController extends AbstractController
 //            'organigramme' => $organigramme
         ]);
     }
+
+
+    public function organigrammeAction()
+    {
+
+    }
 }

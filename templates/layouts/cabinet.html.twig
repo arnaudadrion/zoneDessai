@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main id="main">
+        <div class="structure_sidebar clearfix">
+            {{ include('includes/cabinet-menu.html.twig') }}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+{% endblock %}
