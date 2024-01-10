@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 class CabinetFixtures extends Fixture
 {
     public const CABINET_REFERENCE = 'cabinet_reference';
+
     public function load(ObjectManager $manager): void
     {
         $cabinet = new Cabinet();
