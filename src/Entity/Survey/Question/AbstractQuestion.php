@@ -5,6 +5,8 @@ namespace App\Entity\Survey\Question;
 use App\Entity\Survey\Survey;
 use App\Repository\Survey\Question\AbstractQuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -22,6 +24,10 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
       "float" => FloatQuestion::class,
       "bool" => BooleanQuestion::class,
       "order" => OrderQuestion::class,
+      "textarea" => TextareaQuestion::class,
+      "select" => SelectQuestion::class,
+      "email" => EmailQuestion::class,
+      "date" => DateQuestion::class,
   ])]
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
 abstract class AbstractQuestion
@@ -47,6 +53,9 @@ abstract class AbstractQuestion
     #[ORM\Column(length: 255, nullable: true)]
     private string $transchain;
 
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $type;
+
     public function getId(): int
     {
         return $this->id;
@@ -57,9 +66,10 @@ abstract class AbstractQuestion
         $class = (new \ReflectionClass($this))->getName();
         switch($class) {
             case MultipleChoiceQuestion::class:
-                return 'MCQ';
+                return 'Multiple choices';
             case ChoiceQuestion::class:
-                return 'SQC';
+            case SelectQuestion::class:
+                return 'Simple choice';
             case IntegerQuestion::class:
                 return 'Number';
             case FloatQuestion::class:
@@ -72,6 +82,11 @@ abstract class AbstractQuestion
             default:
                 return 'Text';
         }
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     public function getWeight(): float

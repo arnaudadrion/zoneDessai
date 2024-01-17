@@ -18,6 +18,7 @@ class AdminQuestionType extends AbstractType
     {
         $builder
             ->add('label', TextType::class)
+
             ->add('weight', NumberType::class, ['scale' => 20])
         ;
     }
