@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-#[Entity]
+
 #[Table(name: "question", schema: "schema_name")]
 #[ORM\Entity(repositoryClass: AbstractQuestionRepository::class)]
 #[ORM\InheritanceType("SINGLE_TABLE")]
@@ -52,9 +52,6 @@ abstract class AbstractQuestion
 
     #[ORM\Column(length: 255, nullable: true)]
     private string $transchain;
-
-    #[ORM\Column(length: 255, nullable: false)]
-    private string $type;
 
     public function getId(): int
     {

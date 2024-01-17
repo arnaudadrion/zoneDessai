@@ -2,21 +2,15 @@
 
 namespace App\Entity\Survey\Question;
 
-use App\Repository\Survey\Question\ChoiceQuestionRepository;
 use App\Repository\Survey\Question\SelectQuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SelectQuestionRepository::class)
- */
+#[ORM\Entity(repositoryClass: SelectQuestionRepository::class)]
 class SelectQuestion extends AbstractQuestion
 {
-    /**
-     * @var Choice[]
-     * @ORM\OneToMany(targetEntity=Choice::class, mappedBy="question", cascade={"persist"})
-     */
+    #[ORM\OneToMany(mappedBy: "question", targetEntity: Choice::class, cascade: ["persist"])]
     private $choices;
 
     public function __construct()
