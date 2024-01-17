@@ -12,7 +12,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 
-#[Table(name: "question", schema: "schema_name")]
+#[Table(name: "question", schema: "test")]
 #[ORM\Entity(repositoryClass: AbstractQuestionRepository::class)]
 #[ORM\InheritanceType("SINGLE_TABLE")]
 #[ORM\DiscriminatorColumn(name:"type", type:"string")]
@@ -52,6 +52,12 @@ abstract class AbstractQuestion
 
     #[ORM\Column(length: 255, nullable: true)]
     private string $transchain;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime('now');
+        $this->updatedAt = new \DateTime('now');
+    }
 
     public function getId(): int
     {

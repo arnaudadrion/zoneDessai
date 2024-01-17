@@ -23,13 +23,13 @@ class AbstractQuestionType extends AbstractType
             ->add('label')
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'Choix multiple' => 'multiple',
-                    'Choix simple en select' => 'choice',
-                    'Choix simple' => 'choice',
-                    'Nombre entier' => 'integer',
-                    'Nombre décimale' => 'float',
-                    'Choix binaire' => 'boolean',
-                    'Texte' => 'text'
+                    'Choix multiple' => MultipleChoiceQuestion::class,
+                    'Choix simple en select' => SelectQuestion::class,
+                    'Choix simple' => ChoiceQuestion::class,
+                    'Nombre entier' => IntegerQuestion::class,
+                    'Nombre décimale' => FloatQuestion::class,
+                    'Choix binaire' => BooleanQuestion::class,
+                    'Texte' => TextQuestion::class
                 ],
                 'expanded' => false,
                 'multiple' => false
