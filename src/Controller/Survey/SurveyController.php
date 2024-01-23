@@ -3,7 +3,7 @@
 namespace App\Controller\Survey;
 
 use App\Entity\Survey\Survey;
-use App\Form\SurveyType;
+use App\Form\Survey\SurveyType;
 use App\Repository\Survey\SurveyRepository;
 use App\Services\XML\XMLTranslation;
 use Doctrine\ORM\EntityManagerInterface;

@@ -4,10 +4,39 @@
 <div class="container">
     <h2 class="">Nouvelle question</h2>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+    <form action="" id="form_type" method="POST">
+        <input type="radio" id="type1" name="type" value="ChoiceQuestion">
+        <label for="type1">Choix simple</label>
+
+        <input type="radio" id="type2" name="type" value="SelectQuestion">
+        <label for="type2">Choix simple en select</label>
+
+        <input type="radio" id="type3" name="type" value="MultipleChoiceQuestion">
+        <label for="type3">Choix multiples</label>
+
+        <input type="radio" id="type4" name="type" value="IntegerQuestion">
+        <label for="type4">Nombre entier</label>
+
+        <input type="radio" id="type5" name="type" value="FloatQuestion">
+        <label for="type5">Nombre décimal</label>
+
+        <input type="radio" id="type6" name="type" value="BooleanQuestion">
+        <label for="type6">Oui / Non</label>
+
+        <input type="radio" id="type7" name="type" value="TextareaQuestion">
+        <label for="type7">Champ de texte</label>
+
+        <input type="radio" id="type8" name="type" value="TextQuestion">
+        <label for="type8">Ligne de texte</label>
+
+        <input type="radio" id="type9" name="type" value="EmailQuestion">
+        <label for="type9">Email</label>
+
+        <input type="radio" id="type10" name="type" value="DateQuestion">
+        <label for="type10">Date</label>
+
+        <input type="submit" value="submit">
+    </form>
 </div>
 {% endblock %}
 

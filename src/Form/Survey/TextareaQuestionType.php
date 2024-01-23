@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Survey;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 

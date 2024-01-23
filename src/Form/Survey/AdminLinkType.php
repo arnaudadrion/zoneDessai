@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Survey;
 
 use App\Entity\Survey\Question\ChoiceQuestion;
 use App\Entity\Survey\Question\MultipleChoiceQuestion;
