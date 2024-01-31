@@ -2,7 +2,15 @@
 
 namespace App\Factory\Dossier;
 
-class InvestmentDossier
+class InvestmentDossier implements DossierInterface
 {
+    public function getDocument()
+    {
 
+    }
+
+    public function getReports()
+    {
+
+    }
 }

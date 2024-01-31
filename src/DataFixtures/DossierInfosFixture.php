@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class DossierInfosFixture extends Fixture
 {
+    public const INVESTISSEMENT_TYPE = 'investissement_type';
     public const CAPITAL = 'capital_reference';
 
     /**
@@ -15,9 +16,14 @@ class DossierInfosFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
+        $type = new DossierInfos();
+        $type->setName('type');
+
         $capital = new DossierInfos();
         $capital->setName('capital');
+
         $manager->persist($capital);
+        $manager->flush();
 
         $this->addReference(self::CAPITAL, $capital);
     }

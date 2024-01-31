@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Features;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,15 +27,12 @@ class FeatureType extends AbstractType
             ->add('link', TextType::class, [
                 'label' => 'Nom de la route'
             ])
-            ->add('name', TextType::class, [
-                'label' => 'Nom du parametre',
-                'mapped' => false,
-                'required' => false
-            ])
-            ->add('value', TextType::class, [
-                'label' => 'Valeur',
-                'mapped' => false,
-                'required' => false
+            ->add('parameters', CollectionType::class, [
+                'label' => 'Parametres',
+                'entry_type' => ParameterType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label_attr' => ['class' => 'collection_controls allow_add allow_delete'],
             ])
             ->add('submit', SubmitType::class);
     }

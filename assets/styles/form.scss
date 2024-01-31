@@ -1,0 +1,435 @@
+/*------------------------------------*\
+    GLOBAL
+\*------------------------------------*/
+form{
+    margin: 0;
+}
+/* Wrapper */
+.form_wrapper {
+    position  : relative;
+    margin    : 0 auto;
+    max-width : 600px;
+    width     : 95%;
+    background: #f7f7f7 !important;
+    padding   : 30px 50px;
+}
+/* Entries */
+.entry {
+    position: relative;
+    margin-bottom: 1em;
+}
+/* Radio */
+.radio {
+    margin-bottom: 10px;
+}
+.flex_radio{
+    display: flex;
+    margin-bottom: 1em;
+}
+.label-margin {
+    margin-top: 1em;
+}
+/* Checkbox */
+.checkbox {
+    margin-bottom: 10px;
+}
+/* Textarea */
+textarea {
+    resize: vertical;
+    height: 200px !important;
+    overflow-y: visible !important;
+    background: #f7f7f7 !important;
+}
+/*------------------------------------*\
+    BLOCK
+\*------------------------------------*/
+/* Global */
+.block_form {
+    width: 100%;
+    max-width: 500px;
+    margin    : 0 auto;
+    background: $bg_light;
+    padding   : 30px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+/* Separator */
+.block_form_separator {
+    position: relative;
+    margin  : 20px 0;
+
+    hr {
+        border-top   : 1px solid $grey_d;
+        border-right : none;
+        border-bottom: none;
+        border-left  : none;
+    }
+
+    span {
+        position  : absolute;
+        top       : 50%;
+        left      : 50%;
+        //.translate_both;
+        color     : $grey_b;
+        background: $bg_light;
+        padding   : 2px;
+        font-size : 12px;
+        margin-top: -1px;
+    }
+}
+/* Remember me / Password forgotten */
+.block_form {
+    .remember_me {
+        // display        : flex;
+        // justify-content: space-between;
+        // align-items: center;
+        text-align: right;
+        // margin-top: -3em;
+        margin-bottom: 2em;
+    }
+}
+/* Button in form */
+.block_form {
+    form button {
+        width     : 100%;
+        margin-top: 20px;
+    }
+}
+
+/*------------------------------------*\
+    ALERT FORM
+\*------------------------------------*/
+
+.alert_form {
+    background: $red;
+    color: $white;
+    padding: 10px 20px;
+    p {
+        margin: 0;
+    }
+    a {
+        color: $white;
+        text-decoration: underline;
+    }
+}
+
+/*------------------------------------*\
+    ERRORS
+\*------------------------------------*/
+.input-error {
+    display    : none;
+    color      : $red;
+    font-size  : 14px;
+    line-height: 20px;
+    position   : relative;
+    margin-top : -10px;
+}
+
+.required ~ .input-error {
+    display: block;
+}
+
+.form_error {
+    color    : $red;
+    font-size: 14px;
+    padding  : 5px 0 0;
+    display  : none;
+}
+/*------------------------------------*\
+    IMAGE
+\*------------------------------------*/
+.image-field {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 3em !important;
+    .drop-zone {
+        position        : relative;
+        display         : inline-block;
+        min-width       : 100px;
+        min-height      : 100px;
+        cursor          : pointer;
+
+        input {
+            display : block;
+            position: absolute;
+            top     : 0;
+            left    : 0;
+            width   : 100%;
+            height  : 100%;
+            opacity : 0;
+        }
+    }
+
+    label.btn {
+        margin-left: 1.5em;
+        cursor: pointer;
+        font-weight: 400;
+    }
+}
+/*------------------------------------*\
+    MAP
+\*------------------------------------*/
+.map-field {
+    .map {
+        height: 100%;
+    }
+
+    .controls {
+        margin-top     : 10px;
+        border         : 1px solid transparent;
+        border-radius  : 2px 0 0 2px;
+        height         : 32px;
+        outline        : none;
+        box-shadow     : 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family     : Roboto;
+        font-size       : 15px;
+        font-weight     : 300;
+        margin-left     : 12px;
+        padding         : 0 11px 0 13px;
+        text-overflow   : ellipsis;
+        width           : 300px;
+
+        &:focus {
+            border-color: #4d90fe;
+        }
+    }
+
+    .pac-container {
+        font-family: Roboto;
+    }
+
+    #type-selector {
+        color           : #fff;
+        background-color: #4d90fe;
+        padding         : 5px 11px 0;
+    }
+
+    #type-selector label {
+        font-family: Roboto;
+        font-size  : 13px;
+        font-weight: 300;
+    }
+}
+
+/*------------------------------------*\
+    Collection
+\*------------------------------------*/
+.collection-field
+{
+    .widget_children{display:none;}
+}
+
+/*------------------------------------*\
+    WIDE FORM SEARCH
+\*------------------------------------*/
+
+.wide_form_search {
+    padding-top: 20px;
+    a {
+        i {
+            margin-left: 0.5em;
+        }
+    }
+    .project-search {
+        // margin-bottom: 2em;
+        a {
+            cursor: pointer;
+            i {
+                margin-left: 0.5em;
+            }
+        }
+    }
+    // .team-search {
+    //     margin-top: 2em;
+    // }
+    .group-input
+    {
+        display:flex;
+        justify-content: space-between;
+        align-items: baseline;
+        button
+        {
+            margin-left: 2em;
+        }
+    }
+    .search_categories,
+    .search_categories_updated,
+    .search_stage
+    {
+        padding:1em 0;
+        label
+        {
+            display:inline-block;
+            background-color:$grey_c;
+            padding:0 8px;
+            border-radius:5px;
+            line-height:25px;
+            margin:5px;
+            height: auto;
+            &:before,
+            &:after
+            {
+                display:none;
+            }
+        }
+        input:checked + label
+        {
+            background-color:$red;
+            color:white;
+        }
+
+    }
+}
+
+.filter_wrapper {
+    a {
+        margin-right: 2em;
+    }
+}
+
+
+.range-indicator
+{
+    margin-left:5px;
+    margin-right:5px;
+    font-weight: bold;
+}
+
+
+
+
+// Button Create FORM
+.flex-btn {
+    display: flex;
+    justify-content: flex-start;
+    margin: 3em 0 !important;
+    list-style-type: none;
+}
+.flex-btn-end {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+}
+.flex-btn-wifeel {
+    display: flex;
+    justify-content: space-between;
+    // margin: 2em 0 0;
+}
+.flex-btn-register {
+    // display: flex;
+    // justify-content: center;
+    margin: 0 auto;
+    width: 30%;
+    button {
+        margin-top: 0 !important;
+        margin-bottom: 1em;
+    }
+    // margin-top: 1em !important;
+}
+.flex-categories {
+    display: flex;
+    flex-direction: column;
+}
+.checkbox-categories {
+    padding: 0 5em;
+    hr {
+        margin-top: 20px;
+    }
+}
+.next-btn {
+    margin-right: 20px;
+}
+.previous-btn {
+    margin-right: 20px;
+    background: $green;
+    &:hover {
+        background: $green;
+    }
+}
+.draft-btn {
+    background: $white;
+    color: $grey_4;
+    border: 1px solid $grey_4;
+    margin-left: auto;
+    &:hover {
+        color: $white;
+        background: $grey_4;
+    }
+}
+.content_container_inner_categories {
+    padding: 2em 3em !important;
+}
+
+// NEW UX (à commenter)
+.new-form-style {
+    input, textarea, select {
+        font-family: inherit;
+        background-color: $white !important;
+        border: 0.5px solid $grey_b !important;
+        margin-top: 10px !important;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 10px !important;
+        padding: 0 2em !important;
+        &:focus {
+            border: 1.5px solid $blue !important;
+            box-shadow: none !important;
+        }
+    }
+    .select-dropdown ul li span {
+        color: $red;
+    }
+    textarea {
+        box-sizing: border-box !important;
+        padding-top: 2em !important;
+        padding-bottom: 3em !important;
+        width: 100%;
+        overflow: hidden;
+    }
+    .green_title {
+        color: $green !important;
+        // font-size: 20px !important;
+    }
+    label {
+        font-size: 16px;
+        font-weight: 700;
+        margin-left: 5px;
+    }
+    .select-wrapper {
+        margin-bottom: 2rem !important;
+    }
+    .address_placeholder {
+        margin-bottom: 0 !important;
+    }
+
+    .stage-dropdown {
+        margin-bottom: 2em;
+        .dropdown-content {
+            border-radius: 10px;
+            background: $white;
+            margin-top: 0.9em;
+            li {
+                color: $red !important;
+            }
+        }
+    }
+}
+.conf-margin {
+    margin-top: 15px !important;
+}
+.trumbowyg-label {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 5px;
+}
+.hide_asterisk {
+    color: $grey_e;
+    span {
+        display: none !important;
+    }
+}
+
+
+
+

@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
+{% form_theme form "theme/formTheme.html.twig" %}
 
 {% block body %}
     <div class="container">
         <h2 class="">Nouvelle feature</h2>
         <a href="{{ path('admin_features_list') }}">Retour à la liste</a>
         <div id="features" class="my-5">
-            {{ form_start(form) }}
+            {{ form_start(form, {'attr' : {'class': 'new-form-style form-margin'} }) }}
             {{ form_row(form.title) }}
             {{ form_row(form.content) }}
             {{ form_row(form.link) }}
-            {{ form_label(form.name) }}
-            {{ form_label(form.value) }}
+            {{ form_label(form.parameters) }}
             {{ form_end(form) }}
         </div>
     </div>

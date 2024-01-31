@@ -1,0 +1,135 @@
+{% use "form_div_layout.html.twig" %}
+
+{# Rows #}
+
+{% block form_row -%}
+    <div class="input-field{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{% block button_row -%}
+    <div class="input-field">
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row %}
+
+
+{% block file_row -%}
+
+    {% if label is not same as(false) and label is empty %}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {% endif %}
+
+    <div class="file-field input-field{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        <div class="btn">
+            <span>SELECT</span>
+            {{- form_widget(form) -}}
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="{{ label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}">
+        </div>
+    </div>
+{%- endblock file_row %}
+
+{% block choice_row -%}
+    {% set force_error = true %}
+    {{- block('form_row') }}
+{%- endblock choice_row %}
+
+{% block date_row -%}
+    {% set force_error = true %}
+    {{- block('form_row') }}
+{%- endblock date_row %}
+
+{% block time_row -%}
+    {% set force_error = true %}
+    {{- block('form_row') }}
+{%- endblock time_row %}
+
+{% block datetime_row -%}
+    {% set force_error = true %}
+    {{- block('form_row') }}
+{%- endblock datetime_row %}
+
+{% block checkbox_row -%}
+    <div class="input-field{% if not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div class="input-field{% if not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock radio_row %}
+
+{% block range_row -%}
+    <div class="range-field{% if not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock range_row %}
+
+
+{% block _feature_parameters_entry_row %}
+    {{ form_widget(form, {'attr': {'class': 'new-form-style'}}) }}
+{% endblock %}
+
+{% block _feature_parameters_widget %}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+        {%- set attr = attr|merge({'data-modal-edit-title': 'Nouveau Parametre' }) -%}
+        {%- set attr = attr|merge({'data-modal-edit-confirm': 'Confirmer' }) -%}
+        {%- set attr = attr|merge({'data-modal-add-title': 'Nouveau Parametre' }) -%}
+        {%- set attr = attr|merge({'data-modal-add-confirm': 'Confirmer' }) -%}
+        {%- set attr = attr|merge({'data-modal-abort': 'Annuler' }) -%}
+    {% endif %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' collection-field')|trim}) -%}
+
+    <div {{ block('widget_container_attributes') }}>
+        {{ form_errors(form) }}
+        <table class="collection-table">
+            <thead>
+            <tr>
+                <th>{{ 'Nom du parametre' }}</th>
+                <th>{{ 'Valeur du parametre' }}</th>
+            </tr>
+            </thead>
+            <tbody class="widget_rows"></tbody>
+        </table>
+        <button type="button" class="btn green btn-add">Ajouter</button>
+
+        <div class="widget_children">
+            {% for child in form %}
+                {{ form_widget(child) }}
+            {% endfor %}
+        </div>
+
+        <script type="text/template" class="widget_template">
+            <tr class="widget_row">
+                <td>__roundDate__</td>
+                <td>__fundingProject__</td>
+                <td>
+                    <button type="button" class="btn-edit btn-flat" title="Editer"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button type="button" class="btn-delete btn-flat" title="Retirer"><i class="fa fa-times"></i></button>
+                </td>
+            </tr>
+        </script>
+
+    </div>
+{% endblock %}

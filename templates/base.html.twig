@@ -9,7 +9,14 @@
 
     <script src="https://kit.fontawesome.com/619dcf0659.js" crossorigin="anonymous"></script>
     {% block css %}
+        {{ encore_entry_link_tags('materialize-css') }}
         {{ encore_entry_link_tags('app-css') }}
+    {% endblock %}
+
+    {% block javascript %}
+        {{ encore_entry_script_tags('materialize') }}
+        {{ encore_entry_script_tags('materialize-component') }}
+        {{ encore_entry_script_tags('form') }}
     {% endblock %}
 </head>
 <body>

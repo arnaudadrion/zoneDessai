@@ -2,7 +2,15 @@
 
 namespace App\Factory\Dossier;
 
-class AuditDossier
+class AuditDossier implements DossierInterface
 {
+    public function getDocument()
+    {
 
+    }
+
+    public function getReports()
+    {
+
+    }
 }
