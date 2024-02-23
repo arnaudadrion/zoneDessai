@@ -14,14 +14,18 @@
     {% endblock %}
 
     {% block javascript %}
-        {{ encore_entry_script_tags('materialize') }}
-        {{ encore_entry_script_tags('materialize-component') }}
-        {{ encore_entry_script_tags('form') }}
+
     {% endblock %}
 </head>
 <body>
 {% include 'includes/header.html.twig' %}
 {% block body %}{% endblock %}
-{% block javascript_footer %}{% endblock %}
+
+
+{% block javascript_footer %}
+    {{ encore_entry_script_tags('materialize') }}
+    {#{{ encore_entry_script_tags('materialize-component') }}#}
+    {{ encore_entry_script_tags('form') }}
+{% endblock %}
 </body>
 </html>

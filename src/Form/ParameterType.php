@@ -14,8 +14,12 @@ class ParameterType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Nom du paramètre',
+                'required' => true,
             ])
             ->add('value', TextType::class, [
+                'label' => 'Valeur du paramètre',
+                'required' => true,
             ])
         ;
     }

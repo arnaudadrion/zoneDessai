@@ -42,21 +42,21 @@ jQuery(function($)
 
         var input_trigger_name = cont.attr('name') + '[' + show_key + ']';
         var input_trigger = cont.find('[name="' + input_trigger_name + '"]');
-        if(input_trigger.length == 0)
+        if(input_trigger.length === 0)
         {
             input_trigger_name = show_key;
             input_trigger = cont.find('[name="' + input_trigger_name + '"]');
         }
 
         // Abort
-        if(input_trigger.length == 0) return;
+        if(input_trigger.length === 0) return;
 
         if(input_trigger.is(':radio'))
         {
             input_trigger.change(function()
             {
                 var value = cont.find('[name="' + input_trigger_name + '"]:checked').val();
-                elt_cont.toggle(value == show_value);
+                elt_cont.toggle(value === show_value);
             }).triggerHandler('change');
         }
         else
@@ -64,7 +64,7 @@ jQuery(function($)
             input_trigger.change(function()
             {
                 var value = input_trigger.val();
-                elt_cont.toggle(value == show_value);
+                elt_cont.toggle(value === show_value);
             }).triggerHandler('change');
         }
     }
@@ -88,14 +88,12 @@ jQuery(function($)
 
         var btn_add = container.find('.btn-add');
 
-        var modal_edit = $('<form class="modal modal-fixed-footer"><div class="modal-content"><h4>' + modal_edit_title + '</h4><div class="modal-body"></div></div><div class="modal-footer"><button type="submit" class="btn">' + modal_edit_confirm + '</button><a href="#" class="modal-action modal-close btn-flat">' + modal_abort + '</a></div></form>');
-        var modal_add = $('<form class="modal modal-fixed-footer"><div class="modal-content"><h4>' + modal_add_title + '</h4><div class="modal-body"></div></div><div class="modal-footer"><button type="submit" class="btn">' + modal_add_confirm + '</button><a href="#" class="modal-action modal-close btn-flat">' + modal_abort + '</a></div></form>');
+        var modal_edit = $('<div id="modal-add" class="modal modal-fixed-footer"><div class="modal-content"><form class="modal modal-fixed-footer"><div class="modal-content"><h4>' + modal_edit_title + '</h4><div class="modal-body"></div></div><div class="modal-footer"><button type="submit" class="btn">' + modal_edit_confirm + '</button><a href="#" class="modal-action modal-close btn-flat">' + modal_abort + '</a></div></form></div></div>');
+        var modal_add = $('<div id="modal-add" class="modal modal-fixed-footer"><div class="modal-content"><form class="modal modal-fixed-footer"><div class="modal-content"><h4>' + modal_add_title + '</h4><div class="modal-body"></div></div><div class="modal-footer"><button type="submit" class="btn">' + modal_add_confirm + '</button><a href="#" class="modal-action modal-close btn-flat">' + modal_abort + '</a></div></form></div></div>');
 
 
         $('body').append(modal_edit);
         $('body').append(modal_add);
-        modal_add.modal();
-        modal_edit.modal();
 
         var current_edit_widget;
         var current_add_widget;
@@ -151,7 +149,7 @@ jQuery(function($)
             current_add_widget = $(prototype.replace(/__name__/g, max_id));
             modal_add.find('.modal-body').html(current_add_widget.clone());
             init_form_components(modal_add);
-            modal_add.modal('open');
+            modal_add.modal();
         });
 
         modal_add.submit(function()
@@ -160,7 +158,7 @@ jQuery(function($)
             {
                 var input = $(this);
                 var dest_input = current_add_widget.find(":input[name='" + input.attr("name") + "']");
-                // Solution moche à un problème chelou sur chrome... Made by Val
+
                 if(dest_input.is('select'))
                 {
                     dest_input.find('option:selected').removeAttr('selected');
@@ -207,13 +205,13 @@ jQuery(function($)
 
         function init_form_components(cont)
         {
-            cont.find('select').material_select();
-
-            cont.find('input.datepicker').pickadate({
-                format : 'yyyy-mm-dd',
-                selectMonths: true, // Creates a dropdown to control month
-                selectYears: 15 // Creates a dropdown of 15 years to control year
-            });
+            // cont.find('select').select();
+            //
+            // cont.find('input.datepicker').pickadate({
+            //     format : 'yyyy-mm-dd',
+            //     selectMonths: true, // Creates a dropdown to control month
+            //     selectYears: 15 // Creates a dropdown of 15 years to control year
+            // });
         }
     });
 });

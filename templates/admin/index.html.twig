@@ -21,7 +21,9 @@
 
     <script>
         $(function() {
-            $('#features').initDataTables({{ datatable_settings(datatable) }});
+            $(document).ready(function(){
+                $('#features').initDataTables({{ datatable_settings(datatable) }});
+            });
         });
     </script>
 {% endblock %}

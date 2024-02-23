@@ -23,21 +23,21 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('omines-datatable', './vendor/omines/datatables-bundle/src/Resources/public/js/datatables.js')
     .addEntry('cassebrique', './assets/js/cassebrique.js')
-
-    .addEntry('materialize', [
-        './assets/materialize/js/global.js',
-        './assets/materialize/js/forms.js',
-        './assets/materialize/js/anime.min.js',
-        './assets/materialize/js/buttons.js',
-        './assets/materialize/js/characterCounter.js',
-        './assets/materialize/js/cards.js',
-        './assets/materialize/js/waves.js',
-        './assets/materialize/js/modal.js',
-        './assets/materialize/js/tooltip.js',
-        './assets/materialize/js/tabs.js',
-        './assets/materialize/js/collapsible.js',
-        './assets/materialize/js/datepicker.js'
-    ])
+    .addEntry('materialize', './assets/materialize/js/bin/materialize.js')
+    // .addEntry('materialize', [
+    //     './assets/materialize/js/global.js',
+    //     './assets/materialize/js/forms.js',
+    //     './assets/materialize/js/anime.min.js',
+    //     './assets/materialize/js/buttons.js',
+    //     './assets/materialize/js/characterCounter.js',
+    //     './assets/materialize/js/cards.js',
+    //     './assets/materialize/js/waves.js',
+    //     './assets/materialize/js/modal.js',
+    //     './assets/materialize/js/tooltip.js',
+    //     './assets/materialize/js/tabs.js',
+    //     './assets/materialize/js/collapsible.js',
+    //     './assets/materialize/js/datepicker.js'
+    // ])
     .addEntry('materialize-component', './assets/js/materialize-component.js')
 
     .addEntry('form', './assets/js/form.js')

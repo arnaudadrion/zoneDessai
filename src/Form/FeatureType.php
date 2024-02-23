@@ -28,7 +28,8 @@ class FeatureType extends AbstractType
                 'label' => 'Nom de la route'
             ])
             ->add('parameters', CollectionType::class, [
-                'label' => 'Parametres',
+                'required' => false,
+                'label' => false,
                 'entry_type' => ParameterType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

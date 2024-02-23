@@ -272,4 +272,4 @@
       path_input.trigger('change');
     });
   }); // End of $(document).ready
-})(cash);
+})();

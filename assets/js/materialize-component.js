@@ -2,17 +2,18 @@ jQuery(function($) {
 
     $("body").on('click', '.getmodal', function(e){
         e.preventDefault();
+
         var action = $(this).attr("href");
         var jsonData = new Object();
         jsonData.type = $(this).attr("modal-type");
         jsonData.title = $(this).attr("modal-title");
         jsonData.text = $(this).attr("modal-text");
         jsonData.action = action;
-        var data = JSON.stringify(jsonData)
-
+        // var data = JSON.stringify(jsonData)
+        showModal(jsonData);
         //var formSerialize = $(this).serialize();
-        $.post(action, jsonData, function(response){
-        },'JSON');
+        // $.post(action, jsonData, function(response){
+        // },'JSON');
     });
 
     $("#modal-container").on('click', '.confirmmodal', function(e){
