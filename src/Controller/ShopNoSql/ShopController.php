@@ -27,7 +27,7 @@ class ShopController extends AbstractController
         $htmlArbo = '<ul class="list-group">';
         $this->createHTMLArborescence($this->shop->getMainCategory()->getChildren(), $htmlArbo);
         $htmlArbo .= '</ul class="list-group">';
-//        dump($htmlArbo);
+
         return $this->render('shopNoSql/shop_no_sql.html.twig', ['shop' => $this->shop, 'htmlArbo' => $htmlArbo]);
     }
 

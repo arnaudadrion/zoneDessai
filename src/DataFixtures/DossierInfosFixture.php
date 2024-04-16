@@ -22,6 +22,7 @@ class DossierInfosFixture extends Fixture
         $capital = new DossierInfos();
         $capital->setName('capital');
 
+        $manager->persist($type);
         $manager->persist($capital);
         $manager->flush();
 

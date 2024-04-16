@@ -65,10 +65,8 @@ class HierarchyBuilder
     {
         $name = $user->getFullName();
 
-        $isExists = $hierarchy->exists(function($key, $value) use ($name){
+        return $hierarchy->exists(function($key, $value) use ($name){
             return $value->getName() === $name;
-        });
-
-        return $isExists;
+        });;
     }
 }
