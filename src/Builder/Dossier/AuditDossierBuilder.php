@@ -2,9 +2,15 @@
 
 namespace App\Builder\Dossier;
 
-use App\Builder\Dossier\DossierBuilderInterface;
-
-class AuditDossierBuilder extends AbstractDossier
+class AuditDossierBuilder extends AbstractDossierBuilder
 {
+    public function __construct()
+    {
+        $this->dossier = new AuditDossier();
+    }
 
+    public function getDossier()
+    {
+        return $this->dossier;
+    }
 }

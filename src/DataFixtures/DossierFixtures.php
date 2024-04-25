@@ -16,14 +16,14 @@ class DossierFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $dossierInvestissement = new Dossier();
+        $cabinet = $this->getReference(CabinetFixtures::CABINET_REFERENCE);
 
-        $dossierInvestissement->setName('Dossier investissement');
+        $dossierInvestissement = new Dossier();
+        $dossierInvestissement->setCabinet($cabinet);
         $manager->persist($dossierInvestissement);
 
         $dossierAudit = new Dossier();
-
-        $dossierInvestissement->setName('Dossier audit');
+        $dossierAudit->setCabinet($cabinet);
         $manager->persist($dossierAudit);
 
         $manager->flush();

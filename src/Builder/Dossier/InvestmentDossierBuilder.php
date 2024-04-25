@@ -2,10 +2,19 @@
 
 namespace App\Builder\Dossier;
 
-use App\Builder\Dossier\DossierBuilderInterface;
-use App\Builder\Dossier\Dossier;
+use App\Factory\Dossier\InvestmentDossier;
 
-class InvestmentDossierBuilder extends AbstractDossier
+class InvestmentDossierBuilder extends AbstractDossierBuilder
 {
-    
+
+    public function __construct()
+    {
+        $this->dossier = new InvestmentDossier();
+    }
+
+    public function getDossier()
+    {
+        return $this->dossier;
+    }
+
 }

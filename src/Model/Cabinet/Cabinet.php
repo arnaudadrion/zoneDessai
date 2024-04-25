@@ -52,6 +52,18 @@ class Cabinet
         return $this->collaborators;
     }
 
+    public function setDossiers(ArrayCollection $dossiers): Cabinet
+    {
+        $this->dossiers = $dossiers;
+
+        return $this;
+    }
+
+    public function getDossiers(): ArrayCollection
+    {
+        return $this->dossiers;
+    }
+
     public function openDossier ()
     {
 

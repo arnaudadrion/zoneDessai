@@ -24,7 +24,7 @@ class CabinetController extends AbstractController
         $cabinetId
     ) : Response
     {
-        $cabinet = $builder->build($cabinetId, $repository, $hierarchyBuilder);
+        $cabinet = $builder->build($cabinetId, $hierarchyBuilder);
 
 //        $organigramme = $collabRepository->childrenHierarchy(
 //            null,

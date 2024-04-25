@@ -21,28 +21,14 @@ class DossierInfosRepository extends ServiceEntityRepository
         parent::__construct($registry, DossierInfos::class);
     }
 
-//    /**
-//     * @return DossierInfos[] Returns an array of DossierInfos objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?DossierInfos
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function getAllValuesByDossier($dossierId)
+    {
+        return $this->createQueryBuilder('di')
+                    ->select('di.name', 'div.value')
+                    ->leftJoin('di.dossierInfoValues', 'div')
+                    ->where('div.idDossier = :idDossier')
+                    ->setParameter('idDossier', $dossierId)
+                    ->getQuery()
+                    ->getResult();
+    }
 }
