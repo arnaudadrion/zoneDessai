@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Builder;
+namespace App\Services\Builder;
 
 use App\Model\Cabinet\Cabinet;
 use App\Repository\Cabinet\CabinetRepository;

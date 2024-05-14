@@ -23,12 +23,31 @@ class DossierInfosRepository extends ServiceEntityRepository
 
    public function getAllValuesByDossier($dossierId)
     {
-        return $this->createQueryBuilder('di')
+        $result = $this->createQueryBuilder('di')
                     ->select('di.name', 'div.value')
                     ->leftJoin('di.dossierInfoValues', 'div')
                     ->where('div.idDossier = :idDossier')
                     ->setParameter('idDossier', $dossierId)
                     ->getQuery()
                     ->getResult();
+
+        $data = [];
+        foreach($result as $value){
+            $data[$value['name']] = $value['value'];
+        }
+        return $data;
+    }
+
+    public function getType($dossierId)
+    {
+        return $this->createQueryBuilder('di')
+            ->select('div.value')
+            ->leftJoin('di.dossierInfoValues', 'div')
+            ->where('div.idDossier = :idDossier')
+            ->andWhere('di.name = :type')
+            ->setParameter('idDossier', $dossierId)
+            ->setParameter('type', 'type')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

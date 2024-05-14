@@ -26,7 +26,7 @@ class CabinetRepository extends ServiceEntityRepository
     {
         $result = $this->createQueryBuilder('c')
             ->select('d.id','di.name', 'div.value')
-            ->innerjoin('c.dossiers', 'd')
+            ->innerjoin('c.dossiers', 'd', 'WITH', 'd.cabinet = c.id')
             ->innerjoin('d.dossierInfoValues', 'div')
             ->innerJoin('div.idDossierInfo', 'di')
             ->where('c.id = :idCabinet')

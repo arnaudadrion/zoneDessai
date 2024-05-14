@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Builder;
+namespace App\Services\Builder;
 
 use App\Repository\Cabinet\CollaboratorRepository;
 use Doctrine\Common\Collections\ArrayCollection;

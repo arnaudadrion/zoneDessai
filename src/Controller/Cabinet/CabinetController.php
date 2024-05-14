@@ -2,10 +2,10 @@
 
 namespace App\Controller\Cabinet;
 
-use App\Builder\CabinetBuilder;
-use App\Builder\HierarchyBuilder;
 use App\Repository\Cabinet\CabinetRepository;
 use App\Repository\Cabinet\CollaboratorRepository;
+use App\Services\Builder\CabinetBuilder;
+use App\Services\Builder\HierarchyBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +25,7 @@ class CabinetController extends AbstractController
     ) : Response
     {
         $cabinet = $builder->build($cabinetId, $hierarchyBuilder);
-
+dump($cabinet);
 //        $organigramme = $collabRepository->childrenHierarchy(
 //            null,
 //            false,
@@ -46,7 +46,6 @@ class CabinetController extends AbstractController
 //            'organigramme' => $organigramme
         ]);
     }
-
 
     public function organigrammeAction()
     {

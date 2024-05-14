@@ -1,17 +1,13 @@
 <?php
 
-namespace App\Builder\Dossier;
+namespace App\Services\Builder\Dossier;
 
 use App\Repository\Cabinet\DossierInfoValueRepository;
 
-abstract class Dossier
+class Dossier
 {
     private string $name;
     private string $type;
-    private DossierInfoValueRepository $dossierInfosValue;
-    public function __construct(DossierInfoValueRepository $dossierInfosValue) {
-        $this->dossierInfosValue = $dossierInfosValue;
-    }
 
     public function setName(string $name): Dossier
     {

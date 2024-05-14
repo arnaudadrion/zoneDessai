@@ -8,15 +8,32 @@
 {#            {{ organigramme|raw }}#}
 {#        </div>#}
         <div>
-            {% for collab in cabinet.collaborators %}
-                <div class="card">
-                    <h5 class="card-title">{{ collab.name }}</h5>
-                    <div class="card-body">
-                        <p>Fonction : {{ collab.title }}</p>
-                        <p>{{ collab.ascendentOperation }} : {% if collab.parent %}{{ collab.parent.name }}{% endif %}</p>
-                        <p>{{ collab.descendentOperation }}</p>
+            <h5>L'équipe</h5>
+            <div class="row row-cols-3">
+                {% for collab in cabinet.collaborators %}
+                    <div class="card">
+                        <h5 class="card-title">{{ collab.name }}</h5>
+                        <div class="card-body">
+                            <p>Fonction : {{ collab.title }}</p>
+                            <p>{{ collab.ascendentOperation }} : {% if collab.parent %}{{ collab.parent.name }}{% endif %}</p>
+                            <p>{{ collab.descendentOperation }}</p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <h5>Les dossiers</h5>
+            <div class="row row-cols-3">
+                {% for dossier in cabinet.dossiers %}
+                    <div class="card">
+                        <h5>{{ dossier.value }}</h5>
+                        <div class="card-body">
+                            <p>Voir le dossier <a href="{{ path('dossier_index', {dossierId: dossier.id}) }}">ici</a></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 {% endblock %}

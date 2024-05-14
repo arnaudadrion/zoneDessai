@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Cabinet\DossierInfoValue;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class DossierInfoValueFixtures extends Fixture
+class DossierInfoValueFixtures extends Fixture implements DependentFixtureInterface
 {
 
     /**
@@ -19,9 +20,9 @@ class DossierInfoValueFixtures extends Fixture
         $dossierAudit = $this->getReference(DossierFixtures::DOSSIER_AUDIT_REFERENCE);
         $dossierInvestment = $this->getReference(DossierFixtures::DOSSIER_INVESTISSEMENT_REFERENCE);
 
-        $name = $this->getReference(DossierInfosFixture::NAME);
-        $type = $this->getReference(DossierInfosFixture::TYPE);
-        $capital = $this->getReference(DossierInfosFixture::CAPITAL);
+        $name = $this->getReference(DossierInfosFixtures::NAME_REFERENCE);
+        $type = $this->getReference(DossierInfosFixtures::TYPE_REFERENCE);
+        $capital = $this->getReference(DossierInfosFixtures::CAPITAL_REFERENCE);
 
         $nameAudit = new DossierInfoValue();
         $nameAudit->setIdDossier($dossierAudit);
@@ -46,5 +47,15 @@ class DossierInfoValueFixtures extends Fixture
         $typeInvestment->setIdDossierInfo($type);
         $typeInvestment->setValue('Investment');
         $manager->persist($typeInvestment);
+
+        $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CabinetFixtures::class,
+            DossierInfosFixtures::class
+        ];
     }
 }
